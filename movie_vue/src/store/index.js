@@ -40,7 +40,8 @@ export default new Vuex.Store({
         location: SERVER.ROUTES.login
       }
       dispatch('postAuthData', info)
-    }
+    },
+
   },
   modules: {
 
