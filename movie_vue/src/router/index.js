@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import LoginView from '../views/accounts/LoginView.vue'
+import SignupView from '../views/accounts/SignupView.vue'
+import LogoutView from '../views/accounts/LogoutView.vue'
 
 Vue.use(VueRouter)
 
@@ -16,6 +18,16 @@ Vue.use(VueRouter)
     name: 'Login',
     component: LoginView
   },
+  {
+    path: '/accounts/signup',
+    name: 'Signup',
+    component: SignupView
+  },
+  {
+    path: '/accounts/logout',
+    name: 'Logout',
+    component: LogoutView
+  }
 ]
 
 const router = new VueRouter({
