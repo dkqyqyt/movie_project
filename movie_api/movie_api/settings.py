@@ -26,6 +26,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # DRF
+    'rest_framework',
+
+    # DRF - token auth
+    'rest_framework.authtoken',
+
     # My Apps
     'accounts',
     'boards',

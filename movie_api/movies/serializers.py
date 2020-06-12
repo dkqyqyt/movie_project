@@ -1,0 +1,35 @@
+from rest_framework import serializers
+from accounts.serializers import UserSerializer
+from .models import Movie, Genre
+
+class MovieListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Movie
+        fields = [
+            'id', 
+            'title', 
+            'vote_average',
+            'overview',
+            'adult', 
+            'poster_path',
+            'genres',
+            'release_date'
+            ]
+
+class MovieSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Movie
+        fields = [
+            'title',
+            'original_title',
+            'release_date',
+            'popularity',
+            'vote_count',
+            'vote_average',
+            'adult',
+            'overview',
+            'original_language',
+            'poster_path',
+            'backdrop_path',
+            'genres'
+            ]

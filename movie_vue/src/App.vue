@@ -5,6 +5,8 @@
       <router-link :to="{ name: 'Login' }">Login</router-link> |
       <router-link :to="{ name: 'Signup' }">Signup</router-link> |
       <router-link :to="{ name: 'Logout' }">Logout</router-link> |
+      <router-link :to="{ name: 'MovieList' }">Movie</router-link> |
+      <router-link :to="{ name: 'MovieCreate' }">Movie Create</router-link> |
     </div>
     <router-view/>
   </div>

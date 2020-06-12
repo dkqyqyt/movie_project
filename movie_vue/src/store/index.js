@@ -12,7 +12,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     authToken: cookies.get('auth-token'),
-
+    movies: [],
   },
   getters: {
     isLoggedIn: state => !!state.authToken,
@@ -23,6 +23,12 @@ export default new Vuex.Store({
       state.authToken = token
       cookies.set('auth-token', token)
     },
+    SET_MOVIES(state, movies) {
+      state.movies = movies
+    },
+    ADD_MOVIE(state, movie) {
+      state.movies.push(movie)
+    }
   },
   actions: {
     postAuthData({ commit }, info) {
@@ -58,7 +64,24 @@ export default new Vuex.Store({
           router.push('/')
         })
         .catch(err => console.log(err))
-    }
+    },
+
+    fetchMovies({ commit }) {
+      axios.get(SERVER.URL + SERVER.ROUTES.getMovies)
+        .then(res => {
+          console.log(res)
+          commit('SET_MOVIES', res.data)
+        })
+        .catch(err => console.log(err.response.data))
+    },
+
+    createMovie({ getters }, movieData) {
+      axios.post(SERVER.URL + SERVER.ROUTES.createMovie, movieData, getters.config)
+        .then(() => {
+          router.push('/')
+        })
+        .catch(err => console.log(err.response.data))
+    },
   },
   modules: {
 
