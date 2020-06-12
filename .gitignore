@@ -1,6 +1,11 @@
 
+<<<<<<< HEAD
 # Created by https://www.toptal.com/developers/gitignore/api/django,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=django,visualstudiocode
+=======
+# Created by https://www.toptal.com/developers/gitignore/api/django,vue,visualstudiocode
+# Edit at https://www.toptal.com/developers/gitignore?templates=django,vue,visualstudiocode
+>>>>>>> master
 
 ### Django ###
 *.log
@@ -156,4 +161,19 @@ dmypy.json
 # Ignore all local history of files
 .history
 
+<<<<<<< HEAD
 # End of https://www.toptal.com/developers/gitignore/api/django,visualstudiocode
+=======
+### Vue ###
+# gitignore template for Vue.js projects
+#
+# Recommended template: Node.gitignore
+
+# TODO: where does this rule come from?
+docs/_book
+
+# TODO: where does this rule come from?
+test/
+
+# End of https://www.toptal.com/developers/gitignore/api/django,vue,visualstudiocode
+>>>>>>> master
