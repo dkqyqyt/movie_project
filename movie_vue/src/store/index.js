@@ -12,7 +12,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     authToken: cookies.get('auth-token'),
-
+    movies: [],
+    selectedMovie: null,
+    toUpdateMovie: null,
   },
   getters: {
     isLoggedIn: state => !!state.authToken,
@@ -23,6 +25,18 @@ export default new Vuex.Store({
       state.authToken = token
       cookies.set('auth-token', token)
     },
+    SET_MOVIES(state, movies) {
+      state.movies = movies
+    },
+    ADD_MOVIE(state, movie) {
+      state.movies.push(movie)
+    },
+    SELECT_MOVIE(state, movie) {
+      state.selectedMovie = movie
+    },
+    UPDATE_MOVIE(state, movie) {
+      state.toUpdateMovie = movie
+    }
   },
   actions: {
     postAuthData({ commit }, info) {
@@ -58,6 +72,60 @@ export default new Vuex.Store({
           router.push('/')
         })
         .catch(err => console.log(err))
+    },
+
+    fetchMovies({ commit }) {
+      axios.get(SERVER.URL + SERVER.ROUTES.getMovies)
+        .then(res => {
+          console.log(res)
+          commit('SET_MOVIES', res.data)
+        })
+        .catch(err => console.log(err.response.data))
+    },
+
+    createMovie({ getters }, movieData) {
+      axios.post(SERVER.URL + SERVER.ROUTES.createMovie, movieData, getters.config)
+        .then(res => {
+          console.log(res.data)
+          router.push('/')
+        })
+        .catch(err => console.log(err.response.data))
+    },
+
+    getMovieDetail({ commit }, movieId) {
+      axios.get(SERVER.URL + SERVER.ROUTES.movieDetail + movieId)
+        .then(res => {
+          // console.log(res.data)
+          commit('SELECT_MOVIE', res.data)
+        })
+        .catch(err => console.log(err.response.data))
+    },
+
+    deleteMovie(context, movieId) {
+      axios.delete(SERVER.URL + SERVER.ROUTES.movieDetail + movieId +'/')
+        .then(res => {
+          console.log(res)
+          router.push('/')
+        })
+        .catch(err => console.log(err.response.data))
+    },
+
+    getUpdateMovie({ commit }, movieId) {
+      axios.get(SERVER.URL + SERVER.ROUTES.movieDetail + movieId + SERVER.ROUTES.updateMovie)
+        .then(res => {
+          console.log(res)
+          commit('UPDATE_MOVIE', res.data)
+        })
+        .catch(err => console.log(err.response.data))
+    },
+
+    updateMovie({ getters,state }, movieData) {
+      axios.put(SERVER.URL + SERVER.ROUTES.movieDetail + state.toUpdateMovie.id + '/', movieData, getters.config)
+        .then(res => {
+          console.log(res)
+          router.push({name: 'MovieDetail', params: { id: state.toUpdateMovie.id}})
+        })
+        .catch(err => console.log(err.response.data))
     }
   },
   modules: {
