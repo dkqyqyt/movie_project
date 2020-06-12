@@ -116,7 +116,6 @@ export default {
     },
 
     created() {
-        console.log('created')
         this.getUpdateMovie(this.$route.params.id)
     },
     

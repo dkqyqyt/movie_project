@@ -18,7 +18,10 @@ export default new Vuex.Store({
   },
   getters: {
     isLoggedIn: state => !!state.authToken,
-    config: state => ({ headers: { Authorization: `Token ${state.authToken}`}})
+    config: state => ({ headers: { Authorization: `Token ${state.authToken}`}}),
+    getMovieById: (state) => (id) => {
+      return state.movies.find(movie => movie.id === id)
+    } 
   },
   mutations: {
     SET_TOKEN(state, token) {
@@ -105,18 +108,15 @@ export default new Vuex.Store({
       axios.delete(SERVER.URL + SERVER.ROUTES.movieDetail + movieId +'/')
         .then(res => {
           console.log(res)
-          router.push('/')
+          router.push({ name: 'MovieList'})
         })
         .catch(err => console.log(err.response.data))
     },
 
-    getUpdateMovie({ commit }, movieId) {
-      axios.get(SERVER.URL + SERVER.ROUTES.movieDetail + movieId + SERVER.ROUTES.updateMovie)
-        .then(res => {
-          console.log(res.data)
-          commit('UPDATE_MOVIE', res.data)
-        })
-        .catch(err => console.log(err.response.data))
+    getUpdateMovie({ commit,getters }, movieId) {
+      const movie = getters.getMovieById(movieId)
+      console.log(movie)
+      commit('UPDATE_MOVIE', movie)
     },
 
     updateMovie({ getters,state }, movieData) {
