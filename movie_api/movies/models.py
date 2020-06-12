@@ -15,7 +15,7 @@ class Movie(models.Model):
     overview = models.TextField()
     original_language = models.CharField(max_length=30)
     poster_path = models.CharField(max_length=150)
-    backdrop_path = models.CharField(max_length=150)
+    backdrop_path = models.TextField(null=True)
     genres = models.ManyToManyField(
                 Genre,
                 related_name = 'movie'
