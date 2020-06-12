@@ -1,6 +1,7 @@
 <template>
-  <div v-if="toUpdateMovie">
+  <div>
       <h1>Movie Update</h1>
+      <button @click="mapStateData">기본 값 가져오기</button>
       <div>
           <label for="title">title: </label>
           <input v-model="movieData.title" id="title" type="text">
@@ -66,10 +67,10 @@ import { mapActions, mapState } from 'vuex'
 export default {
     name: 'MovieUpdateView',
     computed: {
-        ...mapState(['toUpdateMovie'])
+        ...mapState(['toUpdateMovie']),
     },
     data() {
-        return {
+        return {      
             movieData: {
                 title: null,
                 original_title: null,
@@ -113,12 +114,12 @@ export default {
             this.movieData.genres = this.toUpdateMovie.genres
         }
     },
+
     created() {
+        console.log('created')
         this.getUpdateMovie(this.$route.params.id)
     },
-    mounted() {
-        this.mapStateData()
-    }
+    
 }
 </script>
 

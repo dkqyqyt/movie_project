@@ -113,7 +113,7 @@ export default new Vuex.Store({
     getUpdateMovie({ commit }, movieId) {
       axios.get(SERVER.URL + SERVER.ROUTES.movieDetail + movieId + SERVER.ROUTES.updateMovie)
         .then(res => {
-          console.log(res)
+          console.log(res.data)
           commit('UPDATE_MOVIE', res.data)
         })
         .catch(err => console.log(err.response.data))
@@ -122,8 +122,8 @@ export default new Vuex.Store({
     updateMovie({ getters,state }, movieData) {
       axios.put(SERVER.URL + SERVER.ROUTES.movieDetail + state.toUpdateMovie.id + '/', movieData, getters.config)
         .then(res => {
-          console.log(res)
-          router.push({name: 'MovieDetail', params: { id: state.toUpdateMovie.id}})
+          console.log(res.data)
+          router.push({name: 'MovieDetail', params: { id: state.toUpdateMovie.id }})
         })
         .catch(err => console.log(err.response.data))
     }
