@@ -1,13 +1,16 @@
 <template>
   <div>
       <h1>Movie Detail</h1>
-      {{ selectedMovie.title }}
-      <ul>
-          <li v-for="genre in selectedMovie.genres" :key="genre">
-              {{ genre }}
-          </li>
-      </ul>
-      <button @click="deleteMovie">delete</button>
+      <div v-if="selectedMovie">
+        {{ selectedMovie.title }}
+        <ul>
+            <li v-for="genre in selectedMovie.genres" :key="genre">
+                {{ genre }}
+            </li>
+        </ul>
+        <button @click="deleteMovie">delete</button>
+        <button @click="updateMovie">update</button>
+      </div>
   </div>
 </template>
 
@@ -23,6 +26,9 @@ export default {
         ...mapActions(['getMovieDetail']),
         deleteMovie() {
             this.$router.push({ name: 'MovieDelete' })
+        },
+        updateMovie() {
+            this.$router.push({ name: 'MovieUpdate'})
         }
     },
     created() {

@@ -14,6 +14,7 @@ export default new Vuex.Store({
     authToken: cookies.get('auth-token'),
     movies: [],
     selectedMovie: null,
+    toUpdateMovie: null,
   },
   getters: {
     isLoggedIn: state => !!state.authToken,
@@ -32,6 +33,9 @@ export default new Vuex.Store({
     },
     SELECT_MOVIE(state, movie) {
       state.selectedMovie = movie
+    },
+    UPDATE_MOVIE(state, movie) {
+      state.toUpdateMovie = movie
     }
   },
   actions: {
@@ -98,10 +102,28 @@ export default new Vuex.Store({
     },
 
     deleteMovie(context, movieId) {
-      axios.delete(SERVER.URL + SERVER.ROUTES.movieDetail + movieId)
+      axios.delete(SERVER.URL + SERVER.ROUTES.movieDetail + movieId +'/')
         .then(res => {
           console.log(res)
           router.push('/')
+        })
+        .catch(err => console.log(err.response.data))
+    },
+
+    getUpdateMovie({ commit }, movieId) {
+      axios.get(SERVER.URL + SERVER.ROUTES.movieDetail + movieId + SERVER.ROUTES.updateMovie)
+        .then(res => {
+          console.log(res)
+          commit('UPDATE_MOVIE', res.data)
+        })
+        .catch(err => console.log(err.response.data))
+    },
+
+    updateMovie({ getters,state }, movieData) {
+      axios.put(SERVER.URL + SERVER.ROUTES.movieDetail + state.toUpdateMovie.id + '/', movieData, getters.config)
+        .then(res => {
+          console.log(res)
+          router.push({name: 'MovieDetail', params: { id: state.toUpdateMovie.id}})
         })
         .catch(err => console.log(err.response.data))
     }

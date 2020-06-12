@@ -10,6 +10,7 @@ import MovieListView from '../views/movies/MovieListView.vue'
 import MovieCreateView from '../views/movies/MovieCreateView.vue'
 import MovieDetailView from '../views/movies/MovieDetailView.vue'
 import MovieDeleteView from '../views/movies/MovieDeleteView.vue'
+import MovieUpdateView from '../views/movies/MovieUpdateView.vue'
 
 Vue.use(VueRouter)
 
@@ -53,6 +54,11 @@ Vue.use(VueRouter)
     path: '/movies/:id/delete',
     name: 'MovieDelete',
     component: MovieDeleteView
+  },
+  {
+    path: '/movies/:id/update',
+    name: 'MovieUpdate',
+    component: MovieUpdateView
   }
 ]
 
