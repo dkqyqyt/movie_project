@@ -13,6 +13,7 @@ export default new Vuex.Store({
   state: {
     authToken: cookies.get('auth-token'),
     movies: [],
+    selectedMovie: null,
   },
   getters: {
     isLoggedIn: state => !!state.authToken,
@@ -28,6 +29,9 @@ export default new Vuex.Store({
     },
     ADD_MOVIE(state, movie) {
       state.movies.push(movie)
+    },
+    SELECT_MOVIE(state, movie) {
+      state.selectedMovie = movie
     }
   },
   actions: {
@@ -77,11 +81,30 @@ export default new Vuex.Store({
 
     createMovie({ getters }, movieData) {
       axios.post(SERVER.URL + SERVER.ROUTES.createMovie, movieData, getters.config)
-        .then(() => {
+        .then(res => {
+          console.log(res.data)
           router.push('/')
         })
         .catch(err => console.log(err.response.data))
     },
+
+    getMovieDetail({ commit }, movieId) {
+      axios.get(SERVER.URL + SERVER.ROUTES.movieDetail + movieId)
+        .then(res => {
+          // console.log(res.data)
+          commit('SELECT_MOVIE', res.data)
+        })
+        .catch(err => console.log(err.response.data))
+    },
+
+    deleteMovie(context, movieId) {
+      axios.delete(SERVER.URL + SERVER.ROUTES.movieDetail + movieId)
+        .then(res => {
+          console.log(res)
+          router.push('/')
+        })
+        .catch(err => console.log(err.response.data))
+    }
   },
   modules: {
 

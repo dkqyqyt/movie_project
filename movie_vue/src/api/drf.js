@@ -6,5 +6,6 @@ export default {
         logout: '/rest-auth/logout/',
         getMovies: '/movies/',
         createMovie: '/movies/create/',
+        movieDetail: '/movies/'
     }
 }

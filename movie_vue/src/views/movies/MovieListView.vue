@@ -3,7 +3,7 @@
       <h1>Movie List</h1>
       <ul>
           <li v-for="movie in movies" :key="movie.id">
-              {{ movie.title }}
+              <button @click="movieDetail(movie.id)">{{ movie.title }}</button>
           </li>
       </ul>
   </div>
@@ -11,6 +11,7 @@
 
 <script>
 import { mapActions,mapState } from 'vuex'
+import router from '@/router'
 
 export default {
     name:'MovieListView',
@@ -18,7 +19,10 @@ export default {
         ...mapState(['movies'])
     },
     methods: {
-        ...mapActions(['fetchMovies'])
+        ...mapActions(['fetchMovies']),
+        movieDetail(movieId) {
+            router.push({ name: 'MovieDetail', params: { id: movieId}})
+        }
     },
     created() {
         this.fetchMovies()
