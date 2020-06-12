@@ -3,5 +3,6 @@ export default {
     ROUTES: {
         login: '/rest-auth/login/',
         signup: '/rest-auth/signup/',
+        logout: '/rest-auth/logout/',
     }
 }

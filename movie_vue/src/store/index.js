@@ -57,7 +57,7 @@ export default new Vuex.Store({
           cookies.remove('auth-token')
           router.push('/')
         })
-        .catch(err => console.log(err.response.data))
+        .catch(err => console.log(err))
     }
   },
   modules: {
