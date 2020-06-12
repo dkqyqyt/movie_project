@@ -1,11 +1,6 @@
 from django.db import models
 from django.conf import settings
 
-<<<<<<< HEAD
-
-class Movie(models.Model):
-    pass
-=======
 class Genre(models.Model):
     name = models.CharField(max_length=50)
 
@@ -29,6 +24,3 @@ class Movie(models.Model):
                     settings.AUTH_USER_MODEL,
                     related_name = 'like_movies'
                 )
-
-    
->>>>>>> master
