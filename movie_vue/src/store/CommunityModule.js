@@ -49,8 +49,9 @@ export default{
     postAuthData({ commit }, info) {
       axios.post(SERVER.URL + info.location, info.data)
         .then(res => {
+            console.log(res)
           commit('SET_TOKEN', res.data.key)
-          router.push({ name: 'MovieList' })
+          router.push({ name: 'Home' })
         })
         .catch(err => console.log(err.response.data))
     },

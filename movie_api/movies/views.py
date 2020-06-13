@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 
 from rest_framework.response import Response
 from rest_framework.decorators import api_view,permission_classes
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
 from .serializers import MovieSerializer, MovieListSerializer, GenreSerializer
 from .models import Movie, Genre
@@ -20,9 +20,13 @@ def detail(request, movie_pk):
         serializer = MovieListSerializer(movie)
         return Response(serializer.data)
     if request.method == 'DELETE':
+        if not request.user.is_superuser:
+            return Response({'삭제할 권한이 없습니다.'})
         movie.delete()
         return Response({'성공적으로 삭제되었습니다.'})
     if request.method == 'PUT':
+        if not request.user.is_superuser:
+            return Response({'수정할 권한이 없습니다.'})
         genres = Genre.objects.all()
         print(request.data)
         for i in range(len(request.data['genres'])):
@@ -36,7 +40,7 @@ def detail(request, movie_pk):
         
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
+@permission_classes([IsAdminUser])
 def create(request):
     genres = Genre.objects.all()
     print(request.data)
