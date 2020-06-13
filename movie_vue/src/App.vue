@@ -29,7 +29,7 @@ import { mapGetters } from 'vuex'
 export default {
   name: 'App',
   computed: {
-    ...mapGetters(['isLoggedIn'])
+    ...mapGetters('CommunityModule',['isLoggedIn'])
   }
 }
 </script>

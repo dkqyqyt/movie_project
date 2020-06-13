@@ -29,10 +29,10 @@ import { mapActions, mapState } from 'vuex'
 export default {
     name: 'MovieDetailView',
     computed: {
-        ...mapState(['selectedMovie'])
+        ...mapState('CommunityModule',['selectedMovie'])
     },
     methods: {
-        ...mapActions(['getMovieDetail']),
+        ...mapActions('CommunityModule',['getMovieDetail']),
         deleteMovie() {
             this.$router.push({ name: 'MovieDelete' })
         },

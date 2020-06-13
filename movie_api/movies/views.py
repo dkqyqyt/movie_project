@@ -23,6 +23,12 @@ def detail(request, movie_pk):
         movie.delete()
         return Response({'성공적으로 삭제되었습니다.'})
     if request.method == 'PUT':
+        genres = Genre.objects.all()
+        print(request.data)
+        for i in range(len(request.data['genres'])):
+            for genre in genres:
+                if genre.name == request.data['genres'][i]:
+                    request.data['genres'][i] = genre.id
         serializer = MovieSerializer(movie ,data=request.data) 
         if serializer.is_valid(raise_exception=True):
             serializer.save()
@@ -48,5 +54,5 @@ def create(request):
 @api_view(['GET'])
 def update(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
-    serializer = MovieSerializer(movie)
+    serializer = MovieListSerializer(movie)
     return Response(serializer.data)

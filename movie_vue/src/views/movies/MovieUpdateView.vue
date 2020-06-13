@@ -135,7 +135,7 @@ import { mapActions, mapState } from 'vuex'
 export default {
     name: 'MovieUpdateView',
     computed: {
-        ...mapState(['selectedMovie']),
+        ...mapState('CommunityModule',['selectedMovie']),
     },
     data() {
         return {      
@@ -152,11 +152,12 @@ export default {
                 poster_path: null,
                 backdrop_path: null,
                 genres: [],
+                movieId: this.$route.params.id,
             },
         }
     },
     methods: {
-        ...mapActions(['getMovieDetail', 'updateMovie']),
+        ...mapActions('CommunityModule',['getMovieDetail', 'updateMovie']),
         mapStateData() {
             this.movieData.title = this.selectedMovie.title
             this.movieData.original_title = this.selectedMovie.original_title

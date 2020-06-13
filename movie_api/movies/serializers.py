@@ -11,17 +11,7 @@ class MovieListSerializer(serializers.ModelSerializer):
     genres = GenreSerializer(many=True)
     class Meta:
         model = Movie
-        fields = [
-            'id', 
-            'title',
-            'original_title', 
-            'vote_average',
-            'overview',
-            'adult', 
-            'poster_path',
-            'genres',
-            'release_date'
-            ]
+        fields = '__all__'
 
 class MovieSerializer(serializers.ModelSerializer):
     class Meta:
