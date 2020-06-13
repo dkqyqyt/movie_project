@@ -29,7 +29,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['createArticle'])
+        ...mapActions('CommunityModule', ['createArticle'])
     }
 }
 </script>

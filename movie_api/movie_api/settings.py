@@ -140,3 +140,5 @@ CORS_ORIGIN_ALLOW_ALL = True
 AUTH_USER_MODEL = 'accounts.User'
 
 SITE_ID = 1
+
+TOKEN_MODEL = 'authtoken.Token'
