@@ -5,7 +5,7 @@ app_name='boards'
 
 urlpatterns = [
     path('', views.index),
-    # path('create/', views.create),
+    path('create/<int:movie_pk>/', views.create),
     # path('board_id/',views.update),
     # path('board_id/', views.delete),
 ]

@@ -12,6 +12,9 @@ import MovieDetailView from '../views/movies/MovieDetailView.vue'
 import MovieDeleteView from '../views/movies/MovieDeleteView.vue'
 import MovieUpdateView from '../views/movies/MovieUpdateView.vue'
 
+import ArticleListView from '../views/boards/ArticleListView.vue'
+import ArticleCreateView from '../views/boards/ArticleCreateView.vue'
+
 Vue.use(VueRouter)
 
   const routes = [
@@ -59,6 +62,16 @@ Vue.use(VueRouter)
     path: '/movies/:id/update',
     name: 'MovieUpdate',
     component: MovieUpdateView
+  },
+  {
+    path: '/boards',
+    name: 'ArticleList',
+    component: ArticleListView
+  },
+  {
+    path: '/boards/create/:movie_id',
+    name: 'ArticleCreate',
+    component: ArticleCreateView
   }
 ]
 

@@ -67,7 +67,7 @@ import { mapActions, mapState } from 'vuex'
 export default {
     name: 'MovieUpdateView',
     computed: {
-        ...mapState(['toUpdateMovie']),
+        ...mapState(['selectedMovie']),
     },
     data() {
         return {      
@@ -89,7 +89,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['getUpdateMovie', 'updateMovie']),
+        ...mapActions(['getMovieDetail', 'updateMovie']),
         addGenre() {
             if(this.genre){
                 this.movieData.genres.push(this.genre)
@@ -100,24 +100,27 @@ export default {
             this.movieData.genres.splice(idx,1)
         },
         mapStateData() {
-            this.movieData.title = this.toUpdateMovie.title
-            this.movieData.original_title = this.toUpdateMovie.original_title
-            this.movieData.release_date = this.toUpdateMovie.release_date
-            this.movieData.popularity = this.toUpdateMovie.popularity
-            this.movieData.vote_count = this.toUpdateMovie.vote_count
-            this.movieData.vote_average = this.toUpdateMovie.vote_average
-            this.movieData.adult = this.toUpdateMovie.adult
-            this.movieData.overview = this.toUpdateMovie.overview
-            this.movieData.original_language = this.toUpdateMovie.original_language
-            this.movieData.poster_path = this.toUpdateMovie.poster_path
-            this.movieData.backdrop_path = this.toUpdateMovie.backdrop_path
-            this.movieData.genres = this.toUpdateMovie.genres
+            this.movieData.title = this.selectedMovie.title
+            this.movieData.original_title = this.selectedMovie.original_title
+            this.movieData.release_date = this.selectedMovie.release_date
+            this.movieData.popularity = this.selectedMovie.popularity
+            this.movieData.vote_count = this.selectedMovie.vote_count
+            this.movieData.vote_average = this.selectedMovie.vote_average
+            this.movieData.adult = this.selectedMovie.adult
+            this.movieData.overview = this.selectedMovie.overview
+            this.movieData.original_language = this.selectedMovie.original_language
+            this.movieData.poster_path = this.selectedMovie.poster_path
+            this.movieData.backdrop_path = this.selectedMovie.backdrop_path
+            this.movieData.genres = this.selectedMovie.genres
         }
     },
 
     created() {
-        this.getUpdateMovie(this.$route.params.id)
+        this.getMovieDetail(this.$route.params.id)
     },
+    mounted() {
+        this.mapStateData()
+    }
     
 }
 </script>

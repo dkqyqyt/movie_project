@@ -10,6 +10,7 @@
         </ul>
         <button @click="deleteMovie">delete</button>
         <button @click="updateMovie">update</button>
+        <button @click="createArticle">write article</button>
       </div>
   </div>
 </template>
@@ -29,6 +30,9 @@ export default {
         },
         updateMovie() {
             this.$router.push({ name: 'MovieUpdate'})
+        },
+        createArticle() {
+            this.$router.push({ name: 'ArticleCreate', params:{ movie_id: this.$route.params.id}})
         }
     },
     created() {

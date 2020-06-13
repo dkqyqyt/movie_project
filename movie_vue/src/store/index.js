@@ -13,8 +13,9 @@ export default new Vuex.Store({
   state: {
     authToken: cookies.get('auth-token'),
     movies: [],
+    articles: [],
+    comments: [],
     selectedMovie: null,
-    toUpdateMovie: null,
   },
   getters: {
     isLoggedIn: state => !!state.authToken,
@@ -39,6 +40,12 @@ export default new Vuex.Store({
     },
     UPDATE_MOVIE(state, movie) {
       state.toUpdateMovie = movie
+    },
+    SET_ARTICLES(state, articles) {
+      state.articles = articles
+    },
+    SET_COMMENTS(state, comments) {
+      state.comments = comments
     }
   },
   actions: {
@@ -50,7 +57,6 @@ export default new Vuex.Store({
         })
         .catch(err => console.log(err.response.data))
     },
-    
     login({ dispatch }, loginData) {
       const info = {
         data: loginData,
@@ -58,7 +64,6 @@ export default new Vuex.Store({
       }
       dispatch('postAuthData', info)
     },
-
     signup({ dispatch }, signupData) {
       const info = {
         data: signupData,
@@ -66,7 +71,6 @@ export default new Vuex.Store({
       }
       dispatch('postAuthData', info)
     },
-
     logout({ commit,getters }) {
       axios.post(SERVER.URL + SERVER.ROUTES.logout, null, getters.config)
         .then(() => {
@@ -76,7 +80,6 @@ export default new Vuex.Store({
         })
         .catch(err => console.log(err))
     },
-
     fetchMovies({ commit }) {
       axios.get(SERVER.URL + SERVER.ROUTES.getMovies)
         .then(res => {
@@ -85,7 +88,6 @@ export default new Vuex.Store({
         })
         .catch(err => console.log(err.response.data))
     },
-
     createMovie({ getters }, movieData) {
       axios.post(SERVER.URL + SERVER.ROUTES.createMovie, movieData, getters.config)
         .then(res => {
@@ -94,16 +96,25 @@ export default new Vuex.Store({
         })
         .catch(err => console.log(err.response.data))
     },
-
-    getMovieDetail({ commit }, movieId) {
-      axios.get(SERVER.URL + SERVER.ROUTES.movieDetail + movieId)
-        .then(res => {
-          // console.log(res.data)
-          commit('SELECT_MOVIE', res.data)
-        })
-        .catch(err => console.log(err.response.data))
+    getMovieDetail({ commit,getters,state }, movieId) {
+      if(state.movies) {
+        const movie = getters.getMovieById(movieId)
+        console.log(movie)
+        commit('SELECT_MOVIE', movie)
+      }else {
+        console.log('nothing')
+        axios.get(SERVER.URL + SERVER.ROUTES.getMovies)
+          .then(res => {
+            console.log(res)
+            commit('SET_MOVIES', res.data)
+          })
+          .then(() => {
+            const movie = getters.getMovieById(movieId)
+            commit('SELECT_MOVIE', movie)
+          })
+          .catch(err => console.log(err.response.data))
+      }
     },
-
     deleteMovie(context, movieId) {
       axios.delete(SERVER.URL + SERVER.ROUTES.movieDetail + movieId +'/')
         .then(res => {
@@ -112,18 +123,33 @@ export default new Vuex.Store({
         })
         .catch(err => console.log(err.response.data))
     },
-
-    getUpdateMovie({ commit,getters }, movieId) {
-      const movie = getters.getMovieById(movieId)
-      console.log(movie)
-      commit('UPDATE_MOVIE', movie)
-    },
-
     updateMovie({ getters,state }, movieData) {
       axios.put(SERVER.URL + SERVER.ROUTES.movieDetail + state.toUpdateMovie.id + '/', movieData, getters.config)
         .then(res => {
           console.log(res.data)
           router.push({name: 'MovieDetail', params: { id: state.toUpdateMovie.id }})
+        })
+        .catch(err => console.log(err.response.data))
+    },
+    fetchArticles({ commit }) {
+      axios.get(SERVER.URL + SERVER.ROUTES.getArticles)
+        .then(res => {
+          console.log(res)
+          commit('SET_ARTICLES', res.data[0])
+          commit('SET_COMMENTS', res.data[1])
+        })
+        .catch(err => console.log(err.response.data))
+    },
+    createArticle({ getters }, articleData) {
+      const movieId = articleData.movieId
+      const newArticleData = {
+        title: articleData.title,
+        content: articleData.content
+      }
+      axios.post(SERVER.URL + SERVER.ROUTES.createArticle + movieId + '/', newArticleData, getters.config)
+        .then(res => {
+          console.log(res)
+          router.push({ name: 'ArticleList' })
         })
         .catch(err => console.log(err.response.data))
     }

@@ -7,6 +7,7 @@
       <router-link :to="{ name: 'Logout' }">Logout</router-link> |
       <router-link :to="{ name: 'MovieList' }">Movie</router-link> |
       <router-link :to="{ name: 'MovieCreate' }">Movie Create</router-link> |
+      <router-link :to="{ name: 'ArticleList' }">Article</router-link> |
     </div>
     <router-view/>
   </div>
