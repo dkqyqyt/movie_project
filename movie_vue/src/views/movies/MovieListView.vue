@@ -4,6 +4,7 @@
       <div class="movie-list-item row">
         <div class="col-3" v-for="movie in movies" :key="movie.id">
             <div class="card">
+                <p>{{ movie.poster_path }}</p>
                 <img :src="'http://image.tmdb.org/t/p/w185/'+ movie.poster_path" class="card-img-top" alt="영화 포스터">
                 <div class="card-body">
                     <h5 class="card-title">{{ movie.title }} <span class="badge badge-info">{{ movie.vote_average }}</span></h5>

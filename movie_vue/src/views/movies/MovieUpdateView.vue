@@ -46,17 +46,6 @@
           <label for="backdrop_path">backdrop path: </label>
           <input v-model="movieData.backdrop_path" id="backdrop_path" type="text">
       </div>
-      <div>
-          <label for="genres">genres: </label>
-          <input v-model="genre" id="genres" type="text">
-          <button @click="addGenre">add genre</button>
-          <ul>
-              <li v-for="genre in movieData.genres" :key="genre">
-                  {{ genre }}
-                  <button @click="deleteGenre(genre)">delete</button>
-              </li>
-          </ul>
-      </div>
       <div class="form-group">
             <h5>장르</h5>
             <span class="form-check">
@@ -164,20 +153,10 @@ export default {
                 backdrop_path: null,
                 genres: [],
             },
-            genre: "",
         }
     },
     methods: {
         ...mapActions(['getMovieDetail', 'updateMovie']),
-        addGenre() {
-            if(this.genre){
-                this.movieData.genres.push(this.genre)
-            }
-        },
-        deleteGenre(genre) {
-            const idx = this.movieData.genres.indexOf(genre)
-            this.movieData.genres.splice(idx,1)
-        },
         mapStateData() {
             this.movieData.title = this.selectedMovie.title
             this.movieData.original_title = this.selectedMovie.original_title
@@ -190,7 +169,9 @@ export default {
             this.movieData.original_language = this.selectedMovie.original_language
             this.movieData.poster_path = this.selectedMovie.poster_path
             this.movieData.backdrop_path = this.selectedMovie.backdrop_path
-            this.movieData.genres = this.selectedMovie.genres
+            for(var i= 0; i < this.selectedMovie.genres.length;i++) {
+                this.movieData.genres.push(this.selectedMovie.genres[i].name)
+            }
         }
     },
 
