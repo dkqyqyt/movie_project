@@ -20,7 +20,7 @@ Vue.use(VueRouter)
   const routes = [
   {
     path: '/',
-    name: Home,
+    name: 'Home',
     component: Home
   },
   {
@@ -79,6 +79,25 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to,from,next) => {
+  const publicPages = ['Login', 'Signup', 'MovieList', 'MovieDetail', 'ArticleList', 'Home']
+  const authPages = ['Login', 'Signup']
+
+  const authRequired = !publicPages.includes(to.name)
+  const unauthRequired = authPages.includes(to.name)
+  const isLogin = !!Vue.$cookies.isKey('auth-token')
+
+  if(unauthRequired && isLogin) {
+    next({ name: 'MovieList'})
+  }
+
+  if(authRequired && !isLogin) {
+    next({ name: 'Login' })
+  }else {
+    next()
+  }
 })
 
 export default router

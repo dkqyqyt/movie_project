@@ -1,15 +1,15 @@
 <template>
   <div>
       <h1>Login</h1>
-      <div>
-          <label for="username">username: </label>
-          <input v-model="loginData.username" id="username" type="text">
+      <div class="login-form">
+        <div class="form-group">
+            <input class="form-control" v-model="loginData.username" id="username" type="text" placeholder="아이디">
+        </div>
+        <div class="form-group">
+            <input class="form-control" v-model="loginData.password" id="password" type="password" placeholder="비밀번호">
+        </div>
+        <button class="btn btn-primary" @click="login(loginData)">로그인</button>
       </div>
-      <div>
-          <label for="password">password: </label>
-          <input v-model="loginData.password" id="password" type="password">
-      </div>
-      <button @click="login(loginData)">login</button>
   </div>
 </template>
 
@@ -32,6 +32,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+    div.login-form {
+        width: 50%;
+        margin: 30px auto;
+    }
 </style>

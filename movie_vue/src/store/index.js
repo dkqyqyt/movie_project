@@ -53,7 +53,7 @@ export default new Vuex.Store({
       axios.post(SERVER.URL + info.location, info.data)
         .then(res => {
           commit('SET_TOKEN', res.data.key)
-          router.push('/')
+          router.push({ name: 'MovieList' })
         })
         .catch(err => console.log(err.response.data))
     },
@@ -76,7 +76,7 @@ export default new Vuex.Store({
         .then(() => {
           commit('SET_TOKEN', null)
           cookies.remove('auth-token')
-          router.push('/')
+          router.push({ name: 'MovieList' })
         })
         .catch(err => console.log(err))
     },
@@ -135,8 +135,7 @@ export default new Vuex.Store({
       axios.get(SERVER.URL + SERVER.ROUTES.getArticles)
         .then(res => {
           console.log(res)
-          commit('SET_ARTICLES', res.data[0])
-          commit('SET_COMMENTS', res.data[1])
+          commit('SET_ARTICLES', res.data)
         })
         .catch(err => console.log(err.response.data))
     },

@@ -23,7 +23,8 @@ class CommentListSerializer(serializers.ModelSerializer):
 
 class CommentSerializer(serializers.ModelSerializer):
     user = UserSerializer(required=False)
-
+    article = ArticleSerializer(required=False)
+    
     class Meta:
         model = Comment
         fields = '__all__'

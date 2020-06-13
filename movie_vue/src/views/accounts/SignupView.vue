@@ -1,19 +1,18 @@
 <template>
   <div>
-      <h1>Signup</h1>
-      <div>
-          <label for="username">username: </label>
-          <input v-model="signupData.username" id="username" type="text">
+      <h1>회원 가입</h1>
+      <div class="signup-form">
+        <div class="form-group">
+            <input class="form-control" v-model="signupData.username" id="username" type="text" placeholder="아이디">
+        </div>
+        <div class="form-group">
+            <input class="form-control" v-model="signupData.password1" id="password1" type="password" placeholder="비밀번호">
+        </div>
+        <div class="form-group">
+            <input class="form-control" v-model="signupData.password2" id="password2" type="password" placeholder="비밀번호 확인">
+        </div>
+        <button class="btn btn-primary" @click="signup(signupData)">회원 가입</button>
       </div>
-      <div>
-          <label for="password1">password1: </label>
-          <input v-model="signupData.password1" id="password1" type="password">
-      </div>
-      <div>
-          <label for="password2">password2: </label>
-          <input v-model="signupData.password2" id="password2" type="password">
-      </div>
-      <button @click="signup(signupData)">signup</button>
   </div>
 </template>
 
@@ -37,6 +36,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+    div.signup-form {
+        width: 70%;
+        margin: 30px auto;
+    }
 </style>

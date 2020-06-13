@@ -12,12 +12,8 @@ from .serializers import ArticleSerializer, ArticleListSerializer, CommentSerial
 @api_view(['GET'])
 def index(request):
     articles = Article.objects.all()
-    comments = Comment.objects.all()
-
     article_serializers = ArticleListSerializer(articles, many=True)
-    comment_serializers = CommentListSerializer(comments, many=True)
-
-    return Response((article_serializers.data, comment_serializers.data))
+    return Response(article_serializers.data)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])

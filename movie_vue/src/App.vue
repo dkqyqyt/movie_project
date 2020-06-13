@@ -1,17 +1,38 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link :to="{ name: 'Login' }">Login</router-link> |
-      <router-link :to="{ name: 'Signup' }">Signup</router-link> |
-      <router-link :to="{ name: 'Logout' }">Logout</router-link> |
-      <router-link :to="{ name: 'MovieList' }">Movie</router-link> |
-      <router-link :to="{ name: 'MovieCreate' }">Movie Create</router-link> |
-      <router-link :to="{ name: 'ArticleList' }">Article</router-link> |
-    </div>
-    <router-view/>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+      <router-link class="navbar-brand" to="/">Home</router-link>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+        <div class="navbar-nav" v-if="isLoggedIn">
+          <router-link class="nav-item nav-link" :to="{ name: 'MovieList' }">Movie</router-link>
+          <router-link class="nav-item nav-link" :to="{ name: 'ArticleList' }">Article</router-link>
+          <router-link class="nav-item nav-link" :to="{ name: 'Logout' }">Logout</router-link>
+        </div>
+        <div class="navbar-nav" v-else>
+          <router-link class="nav-item nav-link" :to="{ name: 'MovieList' }">Movie</router-link>
+          <router-link class="nav-item nav-link" :to="{ name: 'ArticleList' }">Article</router-link>
+          <router-link class="nav-item nav-link" :to="{ name: 'Login' }">Login</router-link>
+          <router-link class="nav-item nav-link" :to="{ name: 'Signup' }">Signup</router-link>
+        </div>
+      </div>
+    </nav>
+      <router-link :to="{ name: 'MovieCreate' }">Movie Create</router-link>
+    <router-view class="container"/>
   </div>
 </template>
+
+<script>
+import { mapGetters } from 'vuex'
+export default {
+  name: 'App',
+  computed: {
+    ...mapGetters(['isLoggedIn'])
+  }
+}
+</script>
 
 <style>
 #app {
