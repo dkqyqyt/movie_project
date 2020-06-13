@@ -92,6 +92,7 @@ export default{
         .catch(err => console.log(err.response.data))
     },
     createMovie({ getters }, movieData) {
+      delete movieData.movieId
       axios.post(SERVER.URL + SERVER.ROUTES.createMovie, movieData, getters.config)
         .then(res => {
           console.log(res.data)
@@ -107,10 +108,12 @@ export default{
                 })
             .catch(err => console.log(err.response.data))
     },
-    deleteMovie(context, movieId) {
-      axios.delete(SERVER.URL + SERVER.ROUTES.movieDetail + movieId +'/')
+    deleteMovie({ getters }, movieId) {
+      axios.delete(SERVER.URL + SERVER.ROUTES.movieDetail + movieId +'/', null, getters.config)
         .then(res => {
-          console.log(res)
+            console.log(res)
+          alert(res)
+
           router.push({ name: 'MovieList'})
         })
         .catch(err => console.log(err.response.data))
