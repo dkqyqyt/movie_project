@@ -1,16 +1,16 @@
 <template>
   <div>
-      <h1>Article Create</h1>
+      <h1 class="text-center">Article Create</h1>
 
-      <div>
-          <label for="title">title: </label>
-          <input v-model="articleData.title" id="title" type="text">
+      <div class="form-group">
+          <label for="title">title</label>
+          <input class="form-control" v-model="articleData.title" id="title" type="text">
       </div>
-      <div>
-          <label for="content">content: </label>
-          <textarea v-model="articleData.content" id="content" cols="30" rows="10"></textarea>
+      <div class="form-group">
+          <label for="content">content</label>
+          <textarea class="form-control" v-model="articleData.content" id="content" cols="30" rows="10"></textarea>
       </div>
-      <button @click="createArticle(articleData)">write</button>
+      <button class="btn btn-primary" @click="createArticle(articleData)">작성</button>
   </div>
 </template>
 

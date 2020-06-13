@@ -134,7 +134,7 @@ export default new Vuex.Store({
     fetchArticles({ commit }) {
       axios.get(SERVER.URL + SERVER.ROUTES.getArticles)
         .then(res => {
-          console.log(res)
+          console.log(res.data)
           commit('SET_ARTICLES', res.data)
         })
         .catch(err => console.log(err.response.data))
@@ -145,6 +145,7 @@ export default new Vuex.Store({
         title: articleData.title,
         content: articleData.content
       }
+      console.log(articleData)
       axios.post(SERVER.URL + SERVER.ROUTES.createArticle + movieId + '/', newArticleData, getters.config)
         .then(res => {
           console.log(res)

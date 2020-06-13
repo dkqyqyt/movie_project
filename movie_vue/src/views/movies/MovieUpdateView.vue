@@ -57,6 +57,85 @@
               </li>
           </ul>
       </div>
+      <div class="form-group">
+            <h5>장르</h5>
+            <span class="form-check">
+                <input class="form-check-input" v-model="movieData.genres" id="adult" type="checkbox" value="모험">
+                <label class="form-check-label" for="adult">모험</label>
+            </span>
+            <span class="form-check">
+                <input class="form-check-input" v-model="movieData.genres" id="adult" type="checkbox" value="액션">
+                <label class="form-check-label" for="adult">액션</label>
+            </span>
+            <div class="form-check">
+                <input class="form-check-input" v-model="movieData.genres" id="adult" type="checkbox" value="애니메이션">
+                <label class="form-check-label" for="adult">애니메이션</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" v-model="movieData.genres" id="adult" type="checkbox" value="코미디">
+                <label class="form-check-label" for="adult">코미디</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" v-model="movieData.genres" id="adult" type="checkbox" value="범죄">
+                <label class="form-check-label" for="adult">범죄</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" v-model="movieData.genres" id="adult" type="checkbox" value="다큐멘터리">
+                <label class="form-check-label" for="adult">다큐멘터리</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" v-model="movieData.genres" id="adult" type="checkbox" value="드라마">
+                <label class="form-check-label" for="adult">드라마</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" v-model="movieData.genres" id="adult" type="checkbox" value="가족">
+                <label class="form-check-label" for="adult">가족</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" v-model="movieData.genres" id="adult" type="checkbox" value="판타지">
+                <label class="form-check-label" for="adult">판타지</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" v-model="movieData.genres" id="adult" type="checkbox" value="역사">
+                <label class="form-check-label" for="adult">역사</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" v-model="movieData.genres" id="adult" type="checkbox" value="공포">
+                <label class="form-check-label" for="adult">공포</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" v-model="movieData.genres" id="adult" type="checkbox" value="음악">
+                <label class="form-check-label" for="adult">음악</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" v-model="movieData.genres" id="adult" type="checkbox" value="미스터리">
+                <label class="form-check-label" for="adult">미스터리</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" v-model="movieData.genres" id="adult" type="checkbox" value="로맨스">
+                <label class="form-check-label" for="adult">로맨스</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" v-model="movieData.genres" id="adult" type="checkbox" value="SF">
+                <label class="form-check-label" for="adult">SF</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" v-model="movieData.genres" id="adult" type="checkbox" value="TV 영화">
+                <label class="form-check-label" for="adult">TV 영화</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" v-model="movieData.genres" id="adult" type="checkbox" value="스릴러">
+                <label class="form-check-label" for="adult">스릴러</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" v-model="movieData.genres" id="adult" type="checkbox" value="전쟁">
+                <label class="form-check-label" for="adult">전쟁</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" v-model="movieData.genres" id="adult" type="checkbox" value="서부">
+                <label class="form-check-label" for="adult">서부</label>
+            </div>
+        </div>
       <button @click="updateMovie(movieData)">update</button>
   </div>
 </template>

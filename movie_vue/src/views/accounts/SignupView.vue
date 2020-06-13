@@ -1,6 +1,6 @@
 <template>
   <div>
-      <h1>회원 가입</h1>
+      <h1 class='text-center'>회원 가입</h1>
       <div class="signup-form">
         <div class="form-group">
             <input class="form-control" v-model="signupData.username" id="username" type="text" placeholder="아이디">
