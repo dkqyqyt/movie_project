@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view,permission_classes
 from rest_framework.permissions import IsAuthenticated
 
-from .serializers import MovieSerializer, MovieListSerializer
+from .serializers import MovieSerializer, MovieListSerializer, GenreSerializer
 from .models import Movie, Genre
 
 @api_view(['GET'])
@@ -32,12 +32,13 @@ def detail(request, movie_pk):
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def create(request):
-    # genres = Genre.objects.all()
-    # for i in range(len(request.data['genres'])):
-    #     for genre in genres:
-    #         if genre.name == request.data['genres'][i]:
-    #             request.data['genres'][i] = genre.id
-                
+    genres = Genre.objects.all()
+    print(request.data)
+    for i in range(len(request.data['genres'])):
+        for genre in genres:
+            if genre.name == request.data['genres'][i]:
+                request.data['genres'][i] = genre.id
+    
     serializer = MovieSerializer(data=request.data)
     
     if serializer.is_valid(raise_exception=True):
