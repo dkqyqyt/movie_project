@@ -1,17 +1,26 @@
 <template>
   <div>
-      <h1>Article List</h1>
-      <ul>
-          <li v-for="article in articles" :key="article.id">
-              {{ article.title }}
-          </li>
-      </ul>
-      <hr>
-      <ul>
-          <li v-for="comment in comments" :key="comment.id">
-              {{ comment.content }}
-          </li>
-      </ul>
+      <h1 class="text-center">게시글</h1>
+      <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">제목</th>
+                <th scope="col">영화</th>
+                <th scope="col">작성자</th>
+                <th scope="col">작성일</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="(article,idx) in articles" :key="article.id">
+                <th scope="row">{{ idx + 1 }}</th>
+                <td>{{ article.title }}</td>
+                <td>{{ article.movie.title }}</td>
+                <td>{{ article.user.username }}</td>
+                <td>{{ article.created_at }}</td>
+            </tr>
+        </tbody>
+      </table>
   </div>
 </template>
 
