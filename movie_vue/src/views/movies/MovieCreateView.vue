@@ -155,15 +155,6 @@ export default {
     },
     methods: {
         ...mapActions(['createMovie']),
-        addGenre() {
-            if(this.genre){
-                this.movieData.genres.push(this.genre)
-            }
-        },
-        deleteGenre(genre) {
-            const idx = this.movieData.genres.indexOf(genre)
-            this.movieData.genres.splice(idx,1)
-        }
     }
 }
 </script>
