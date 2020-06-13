@@ -1,50 +1,49 @@
 <template>
   <div>
       <h1>Movie Update</h1>
-      <button @click="mapStateData">기본 값 가져오기</button>
-      <div>
+      <div class="form-group">
           <label for="title">title: </label>
-          <input v-model="movieData.title" id="title" type="text">
+          <input class="form-control" v-model="movieData.title" id="title" type="text">
       </div>
-      <div>
+      <div class="form-group">
           <label for="original_title">original title: </label>
-          <input v-model="movieData.original_title" id="original_title" type="text">
+          <input class="form-control" v-model="movieData.original_title" id="original_title" type="text">
       </div>
-      <div>
+      <div class="form-group">
           <label for="release_date">release date: </label>
-          <input v-model="movieData.release_date" id="release_date" type="date">
+          <input class="form-control" v-model="movieData.release_date" id="release_date" type="date">
       </div>
-      <div>
+      <div class="form-group">
           <label for="popularity">popularity: </label>
-          <input v-model="movieData.popularity" id="popularity" type="number">
+          <input class="form-control" v-model="movieData.popularity" id="popularity" type="number">
       </div>
-      <div>
+      <div class="form-group">
           <label for="vote_count">vote count: </label>
-          <input v-model="movieData.vote_count" id="vote_count" type="number">
+          <input class="form-control" v-model="movieData.vote_count" id="vote_count" type="number">
       </div>
-      <div>
+      <div class="form-group">
           <label for="vote_average">vote average: </label>
-          <input v-model="movieData.vote_average" id="vote_average" type="number">
+          <input class="form-control" v-model="movieData.vote_average" id="vote_average" type="number">
       </div>
-      <div>
+      <div class="form-group">
           <label for="adult">adult: </label>
-          <input v-model="movieData.adult" id="adult" type="text">
+          <input class="form-control" v-model="movieData.adult" id="adult" type="text">
       </div>
-      <div>
+      <div class="form-group">
           <label for="overview">overview: </label>
-          <textarea  v-model="movieData.overview" id="overview" cols="30" rows="10"></textarea>
+          <textarea class="form-control" v-model="movieData.overview" id="overview" cols="30" rows="10"></textarea>
       </div>
-      <div>
+      <div class="form-group">
           <label for="original_language">original language: </label>
-          <input v-model="movieData.original_language" id="original_language" type="text">
+          <input class="form-control" v-model="movieData.original_language" id="original_language" type="text">
       </div>
-      <div>
+      <div class="form-group">
           <label for="poster_path">poster path: </label>
-          <input v-model="movieData.poster_path" id="poster_path" type="text">
+          <input class="form-control" v-model="movieData.poster_path" id="poster_path" type="text">
       </div>
-      <div>
+      <div class="form-group">
           <label for="backdrop_path">backdrop path: </label>
-          <input v-model="movieData.backdrop_path" id="backdrop_path" type="text">
+          <input class="form-control" v-model="movieData.backdrop_path" id="backdrop_path" type="text">
       </div>
       <div class="form-group">
             <h5>장르</h5>
