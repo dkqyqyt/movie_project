@@ -1,6 +1,6 @@
 <template>
   <div>
-      <h1>Login</h1>
+      <h1 class="text-center">로그인</h1>
       <div class="login-form">
         <div class="form-group">
             <input class="form-control" v-model="loginData.username" id="username" type="text" placeholder="아이디">

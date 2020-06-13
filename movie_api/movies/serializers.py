@@ -7,7 +7,8 @@ class MovieListSerializer(serializers.ModelSerializer):
         model = Movie
         fields = [
             'id', 
-            'title', 
+            'title',
+            'original_title', 
             'vote_average',
             'overview',
             'adult', 

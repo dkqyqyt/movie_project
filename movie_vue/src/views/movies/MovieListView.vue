@@ -1,6 +1,6 @@
 <template>
   <div>
-      <h1>Movie List</h1>
+      <h1 class="text-center">영화</h1>
       <div class="movie-list-item row">
         <div class="col-3" v-for="movie in movies" :key="movie.id">
             <div class="card">

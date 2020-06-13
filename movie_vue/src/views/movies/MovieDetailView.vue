@@ -1,17 +1,25 @@
 <template>
   <div>
-      <h1>Movie Detail</h1>
-      <div v-if="selectedMovie">
-        {{ selectedMovie.title }}
-        <ul>
-            <li v-for="genre in selectedMovie.genres" :key="genre">
-                {{ genre }}
-            </li>
-        </ul>
-        <button @click="deleteMovie">delete</button>
-        <button @click="updateMovie">update</button>
-        <button @click="createArticle">write article</button>
-      </div>
+      <h1 class="text-center">영화 정보</h1>
+      <div class="mt-5" v-if="selectedMovie">
+        <div class="movie-item">
+            <h3>{{ selectedMovie.title }} <span class="badge badge-info">{{ selectedMovie.vote_average }}</span></h3>
+            <p>{{ selectedMovie.original_title }}, {{ selectedMovie.release_date }}</p>
+            <hr>
+            <h5>장르</h5>
+            <span class="badge badge-info genre" v-for="genre in selectedMovie.genres" :key="genre">{{ genre }}</span>
+            <hr>
+            <h5 v-if="selectedMovie.overview">줄거리</h5>
+            <p>{{ selectedMovie.overview }}</p>
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-primary" @click="createArticle">후기 작성</button>
+                <div>
+                    <button class="btn btn-secondary" @click="updateMovie">수정</button>
+                    <button class="btn btn-danger" @click="deleteMovie">삭제</button>
+                </div>
+            </div>
+        </div>
+    </div>
   </div>
 </template>
 
@@ -41,6 +49,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>
