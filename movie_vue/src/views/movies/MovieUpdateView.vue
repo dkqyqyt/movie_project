@@ -1,61 +1,49 @@
 <template>
   <div>
       <h1>Movie Update</h1>
-      <button @click="mapStateData">기본 값 가져오기</button>
-      <div>
+      <div class="form-group">
           <label for="title">title: </label>
-          <input v-model="movieData.title" id="title" type="text">
+          <input class="form-control" v-model="movieData.title" id="title" type="text">
       </div>
-      <div>
+      <div class="form-group">
           <label for="original_title">original title: </label>
-          <input v-model="movieData.original_title" id="original_title" type="text">
+          <input class="form-control" v-model="movieData.original_title" id="original_title" type="text">
       </div>
-      <div>
+      <div class="form-group">
           <label for="release_date">release date: </label>
-          <input v-model="movieData.release_date" id="release_date" type="date">
+          <input class="form-control" v-model="movieData.release_date" id="release_date" type="date">
       </div>
-      <div>
+      <div class="form-group">
           <label for="popularity">popularity: </label>
-          <input v-model="movieData.popularity" id="popularity" type="number">
+          <input class="form-control" v-model="movieData.popularity" id="popularity" type="number">
       </div>
-      <div>
+      <div class="form-group">
           <label for="vote_count">vote count: </label>
-          <input v-model="movieData.vote_count" id="vote_count" type="number">
+          <input class="form-control" v-model="movieData.vote_count" id="vote_count" type="number">
       </div>
-      <div>
+      <div class="form-group">
           <label for="vote_average">vote average: </label>
-          <input v-model="movieData.vote_average" id="vote_average" type="number">
+          <input class="form-control" v-model="movieData.vote_average" id="vote_average" type="number">
       </div>
-      <div>
+      <div class="form-group">
           <label for="adult">adult: </label>
-          <input v-model="movieData.adult" id="adult" type="text">
+          <input class="form-control" v-model="movieData.adult" id="adult" type="text">
       </div>
-      <div>
+      <div class="form-group">
           <label for="overview">overview: </label>
-          <textarea  v-model="movieData.overview" id="overview" cols="30" rows="10"></textarea>
+          <textarea class="form-control" v-model="movieData.overview" id="overview" cols="30" rows="10"></textarea>
       </div>
-      <div>
+      <div class="form-group">
           <label for="original_language">original language: </label>
-          <input v-model="movieData.original_language" id="original_language" type="text">
+          <input class="form-control" v-model="movieData.original_language" id="original_language" type="text">
       </div>
-      <div>
+      <div class="form-group">
           <label for="poster_path">poster path: </label>
-          <input v-model="movieData.poster_path" id="poster_path" type="text">
+          <input class="form-control" v-model="movieData.poster_path" id="poster_path" type="text">
       </div>
-      <div>
+      <div class="form-group">
           <label for="backdrop_path">backdrop path: </label>
-          <input v-model="movieData.backdrop_path" id="backdrop_path" type="text">
-      </div>
-      <div>
-          <label for="genres">genres: </label>
-          <input v-model="genre" id="genres" type="text">
-          <button @click="addGenre">add genre</button>
-          <ul>
-              <li v-for="genre in movieData.genres" :key="genre">
-                  {{ genre }}
-                  <button @click="deleteGenre(genre)">delete</button>
-              </li>
-          </ul>
+          <input class="form-control" v-model="movieData.backdrop_path" id="backdrop_path" type="text">
       </div>
       <div class="form-group">
             <h5>장르</h5>
@@ -146,7 +134,7 @@ import { mapActions, mapState } from 'vuex'
 export default {
     name: 'MovieUpdateView',
     computed: {
-        ...mapState(['selectedMovie']),
+        ...mapState('CommunityModule',['selectedMovie']),
     },
     data() {
         return {      
@@ -163,21 +151,12 @@ export default {
                 poster_path: null,
                 backdrop_path: null,
                 genres: [],
+                movieId: this.$route.params.id,
             },
-            genre: "",
         }
     },
     methods: {
-        ...mapActions(['getMovieDetail', 'updateMovie']),
-        addGenre() {
-            if(this.genre){
-                this.movieData.genres.push(this.genre)
-            }
-        },
-        deleteGenre(genre) {
-            const idx = this.movieData.genres.indexOf(genre)
-            this.movieData.genres.splice(idx,1)
-        },
+        ...mapActions('CommunityModule',['getMovieDetail', 'updateMovie']),
         mapStateData() {
             this.movieData.title = this.selectedMovie.title
             this.movieData.original_title = this.selectedMovie.original_title
@@ -190,7 +169,9 @@ export default {
             this.movieData.original_language = this.selectedMovie.original_language
             this.movieData.poster_path = this.selectedMovie.poster_path
             this.movieData.backdrop_path = this.selectedMovie.backdrop_path
-            this.movieData.genres = this.selectedMovie.genres
+            for(var i= 0; i < this.selectedMovie.genres.length;i++) {
+                this.movieData.genres.push(this.selectedMovie.genres[i].name)
+            }
         }
     },
 

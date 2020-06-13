@@ -154,7 +154,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['createMovie']),
+        ...mapActions('CommunityModule',['createMovie']),
     }
 }
 </script>

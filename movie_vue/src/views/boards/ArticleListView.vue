@@ -30,10 +30,10 @@ import { mapActions, mapState } from 'vuex'
 export default {
     name: 'ArticleListView',
     computed: {
-        ...mapState(['articles','comments'])
+        ...mapState('CommunityModule',['articles','comments'])
     },
     methods: {
-        ...mapActions(['fetchArticles'])
+        ...mapActions('CommunityModule',['fetchArticles'])
     },
     created() {
         this.fetchArticles()
