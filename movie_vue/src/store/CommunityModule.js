@@ -176,7 +176,20 @@ export default{
                 commit('SET_COMMENTS', res.data[1])
             })
             .catch(err => console.log(err.response.data))
+    },
+    updateArticle({ getters }, articleData) {
+      const articleId = articleData.articleId
+      delete articleData.movieId
+      delete articleData.articleId
+      
+      axios.put(SERVER.URL + SERVER.ROUTES.getArticleDetail + articleId + '/', articleData, getters.config)
+        .then(res => {
+          console.log(res)
+          router.push({ name: 'ArticleDetail', params: { article_id: articleId}})
+        })
+        .catch(err => console.log(err.response.data))
     }
+
   },
   modules: {
 

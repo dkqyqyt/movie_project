@@ -10,6 +10,6 @@ export default {
         updateMovie: '/update/',
         getArticles: '/boards/',
         createArticle: '/boards/create/',
-        getArticleDetail: '/boards/'
+        getArticleDetail: '/boards/',
     }
 }
