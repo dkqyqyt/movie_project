@@ -11,6 +11,7 @@
           <router-link v-if="isAdmin" class="nav-item nav-link" :to="{ name: 'MovieCreate' }">Movie Create</router-link>
           <router-link class="nav-item nav-link" :to="{ name: 'ArticleList' }">Article</router-link>
           <router-link class="nav-item nav-link" :to="{ name: 'Logout' }">Logout</router-link>
+          <span v-if="loginUsername" class="nav-item nav-link">{{ loginUsername }}님 환영합니다.</span>
         </div>
         <div class="navbar-nav" v-else>
           <router-link class="nav-item nav-link" :to="{ name: 'MovieList' }">Movie</router-link>
@@ -30,7 +31,7 @@ export default {
   name: 'App',
   computed: {
     ...mapGetters('CommunityModule',['isLoggedIn']),
-    ...mapState('CommunityModule', ['isAdmin'])
+    ...mapState('CommunityModule', ['isAdmin', 'loginUsername'])
   }
 }
 </script>

@@ -163,7 +163,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions('CommunityModule',['createMovie','updateMovie', 'getMovieDetail']),
+        ...mapActions('CommunityModule',['createMovie','updateMovie']),
         mapStateData() {
             this.movieData.title = this.selectedMovie.title
             this.movieData.original_title = this.selectedMovie.original_title

@@ -10,6 +10,7 @@ export default{
   state: {
     authToken: cookies.get('auth-token'),
     isAdmin: false,
+    loginUsername: null,
     movies: [],
     articles: [],
     comments: [],
@@ -31,6 +32,9 @@ export default{
         }else {
             state.isAdmin = false
         }
+    },
+    SET_USERNAME(state, name) {
+        state.loginUsername = name
     },
     SET_MOVIES(state, movies) {
       state.movies = movies
@@ -61,6 +65,7 @@ export default{
             console.log(res)
           commit('SET_TOKEN', res.data.token)
           commit('SET_ISADMIN', res.data.user.is_superuser)
+          commit('SET_USERNAME', res.data.user.username)
           router.push({ name: 'Home' })
         })
         .catch(err => console.log(err.response.data))
@@ -119,12 +124,14 @@ export default{
                 })
             .catch(err => console.log(err.response.data))
     },
-    deleteMovie({ getters }, movieId) {
-      axios.delete(SERVER.URL + SERVER.ROUTES.movieDetail + movieId +'/', null, getters.config)
+    deleteMovie({ state } , movieId) {
+      axios.delete(SERVER.URL + SERVER.ROUTES.movieDetail + movieId +'/', { 
+          headers: {
+              Authorization: `JWT ${state.authToken}`
+          } 
+        })
         .then(res => {
             console.log(res)
-        //   alert(res)
-
           router.push({ name: 'MovieList'})
         })
         .catch(err => console.log(err.response.data))
@@ -169,7 +176,20 @@ export default{
                 commit('SET_COMMENTS', res.data[1])
             })
             .catch(err => console.log(err.response.data))
+    },
+    updateArticle({ getters }, articleData) {
+      const articleId = articleData.articleId
+      delete articleData.movieId
+      delete articleData.articleId
+      
+      axios.put(SERVER.URL + SERVER.ROUTES.getArticleDetail + articleId + '/', articleData, getters.config)
+        .then(res => {
+          console.log(res)
+          router.push({ name: 'ArticleDetail', params: { article_id: articleId}})
+        })
+        .catch(err => console.log(err.response.data))
     }
+
   },
   modules: {
 
