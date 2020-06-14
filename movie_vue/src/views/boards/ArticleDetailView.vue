@@ -47,13 +47,16 @@ export default {
 		}
 	},
 	methods: {
-		...mapActions('CommunityModule',['getArticleDetail', 'createComment']),
+		...mapActions('CommunityModule',['getArticleDetail']),
 		moveToUpdate() {
 			this.$router.push({ name: 'ArticleCreate', params: { movie_id: this.movieId, article_id: this.$route.params.article_id}})
 		},
 		moveToDelete() {
 			this.$router.push({ name: 'ArticleDelete', params: { article_id: this.$route.params.article_id }})
 		},
+		createComment() {
+			this.$router.push({ name: 'CommentCreate', params: { article_id: this.$route.params.article_id }, query: { commentData: this.commentData }})
+		}
 	},
 	created() {
 		this.getArticleDetail(this.$route.params.article_id)

@@ -16,6 +16,8 @@ import ArticleCreateView from '../views/boards/ArticleCreateView.vue'
 import ArticleDetailView from '../views/boards/ArticleDetailView.vue'
 import ArticleDeleteView from '../views/boards/ArticleDeleteView.vue'
 
+import CommentCreateView from '../views/boards/CommentCreateView.vue'
+
 Vue.use(VueRouter)
 
   const routes = [
@@ -78,6 +80,11 @@ Vue.use(VueRouter)
     path: '/boards/:article_id/delete',
     name: 'ArticleDelete',
     component: ArticleDeleteView
+  },
+  {
+    path: '/boards/:article_id/comments/create',
+    name: 'CommentCreate',
+    component: CommentCreateView
   }
 ]
 
