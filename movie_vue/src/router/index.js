@@ -14,6 +14,7 @@ import MovieDeleteView from '../views/movies/MovieDeleteView.vue'
 import ArticleListView from '../views/boards/ArticleListView.vue'
 import ArticleCreateView from '../views/boards/ArticleCreateView.vue'
 import ArticleDetailView from '../views/boards/ArticleDetailView.vue'
+import ArticleDeleteView from '../views/boards/ArticleDeleteView.vue'
 
 Vue.use(VueRouter)
 
@@ -72,6 +73,11 @@ Vue.use(VueRouter)
     path: '/boards/:article_id',
     name: 'ArticleDetail',
     component: ArticleDetailView
+  },
+  {
+    path: '/boards/:article_id/delete',
+    name: 'ArticleDelete',
+    component: ArticleDeleteView
   }
 ]
 

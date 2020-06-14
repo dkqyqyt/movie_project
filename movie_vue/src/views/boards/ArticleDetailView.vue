@@ -31,7 +31,7 @@
 import { mapActions, mapState } from 'vuex'
 
 export default {
-	name: 'ArticleDetail',
+	name: 'ArticleDetailView',
 	computed: {
 		...mapState('CommunityModule',['selectedArticle','comments','loginUsername']),
 		movieId() {
@@ -51,7 +51,7 @@ export default {
 			this.$router.push({ name: 'ArticleCreate', params: { movie_id: this.movieId, article_id: this.$route.params.article_id}})
 		},
 		moveToDelete() {
-			
+			this.$router.push({ name: 'ArticleDelete', params: { article_id: this.$route.params.article_id }})
 		}
 	},
 	created() {

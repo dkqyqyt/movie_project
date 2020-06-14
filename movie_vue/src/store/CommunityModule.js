@@ -188,6 +188,17 @@ export default{
           router.push({ name: 'ArticleDetail', params: { article_id: articleId}})
         })
         .catch(err => console.log(err.response.data))
+    },
+    deleteArticle({ state }, articleId) {
+      axios.delete(SERVER.URL + SERVER.ROUTES.getArticleDetail + articleId + '/', {
+        headers: {
+          Authorization: `JWT ${state.authToken}`
+        }
+      })
+        .then(() => {
+          router.push({ name: 'ArticleList' })
+        })
+        .catch(err => console.log(err.response.data))
     }
 
   },
