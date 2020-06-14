@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
 
+
 from rest_framework.response import Response
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
@@ -62,3 +63,24 @@ def update(request, article_pk):
     article = get_object_or_404(Article, pk=article_pk)
     serializer = ArticleSerializer(article)
     return Response(serializer.data)
+
+# article 에 대한 comment 작성
+@api_view(['POST'])
+def comment_create(request, article_pk):
+    comments = Comment.objects.filter(article = article_pk)
+    serializer = CommentSerializer(data=request.data)
+    if serializer.is_valid(raise_exception=True):
+        serializer.save(user=request.user, comment = comment)
+        return Response(serializer.data)
+
+    return Response(serializer.data)
+
+# article에 대한 comment 삭제
+@api_view(['DELETE'])
+def comment_delete(request, comment_pk, article_pk):
+    comment = get_object_or_404(Comment, pk = comment_pk)
+    if request.user == comment.user :
+        comment.delete()
+        return Response({' 해당 댓글이 성공적으로 삭제되었습니다.'})
+    else :
+        return Response({'작성자만 삭제가능합니다.'})
