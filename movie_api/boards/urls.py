@@ -10,6 +10,4 @@ urlpatterns = [
     path('<int:article_pk>/', views.detail), # 전체 게시글 RUD
     path('<int:article_pk>/comments/create/', views.comment_create, name="comment_create"),
     path('<int:article_pk>/comments/delete/<int:comment_pk>/', views.comment_delete, name="comment_delete"),
-    # path('<int:board_id>/',views.update),
-    # path('board_id/', views.delete),
 ]

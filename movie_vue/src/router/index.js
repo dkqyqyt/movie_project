@@ -14,6 +14,10 @@ import MovieDeleteView from '../views/movies/MovieDeleteView.vue'
 import ArticleListView from '../views/boards/ArticleListView.vue'
 import ArticleCreateView from '../views/boards/ArticleCreateView.vue'
 import ArticleDetailView from '../views/boards/ArticleDetailView.vue'
+import ArticleDeleteView from '../views/boards/ArticleDeleteView.vue'
+
+import CommentCreateView from '../views/boards/CommentCreateView.vue'
+import CommentDeleteView from '../views/boards/CommentDeleteView.vue'
 
 Vue.use(VueRouter)
 
@@ -72,6 +76,21 @@ Vue.use(VueRouter)
     path: '/boards/:article_id',
     name: 'ArticleDetail',
     component: ArticleDetailView
+  },
+  {
+    path: '/boards/:article_id/delete',
+    name: 'ArticleDelete',
+    component: ArticleDeleteView
+  },
+  {
+    path: '/boards/:article_id/comments/create',
+    name: 'CommentCreate',
+    component: CommentCreateView
+  },
+  {
+    path: '/boards/:article_id/comments/delete/:comment_id',
+    name: 'CommentDelete',
+    component: CommentDeleteView
   }
 ]
 

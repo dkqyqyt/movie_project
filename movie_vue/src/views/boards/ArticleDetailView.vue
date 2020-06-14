@@ -17,11 +17,11 @@
 	Comments<br>
 	<label for="comment"></label>
 	<textarea v-model="commentData.content" id="comment" cols="100" rows="3"></textarea>
-	<button>댓글 작성</button>
+	<button @click="createComment(commentData)">댓글 작성</button>
 	<ul>
 		<li v-for="comment in comments" :key="comment.id">
 			{{ comment.content }}
-			<button>삭제</button>
+			<button @click="deleteComment(comment.id)">삭제</button>
 		</li>
 	</ul>
   </div>
@@ -31,7 +31,7 @@
 import { mapActions, mapState } from 'vuex'
 
 export default {
-	name: 'ArticleDetail',
+	name: 'ArticleDetailView',
 	computed: {
 		...mapState('CommunityModule',['selectedArticle','comments','loginUsername']),
 		movieId() {
@@ -41,8 +41,9 @@ export default {
 	data() {
 		return {
 			commentData: {
-				content: null
-			}
+				content: null,
+				articleId: this.$route.params.article_id
+			},
 		}
 	},
 	methods: {
@@ -51,7 +52,14 @@ export default {
 			this.$router.push({ name: 'ArticleCreate', params: { movie_id: this.movieId, article_id: this.$route.params.article_id}})
 		},
 		moveToDelete() {
-			
+			this.$router.push({ name: 'ArticleDelete', params: { article_id: this.$route.params.article_id }})
+		},
+		createComment() {
+			this.$router.push({ name: 'CommentCreate', params: { article_id: this.$route.params.article_id }, query: { commentData: this.commentData }})
+		},
+		deleteComment(commentId) {
+			console.log(commentId)
+			this.$router.push({ name: 'CommentDelete', params: { article_id: this.$route.params.article_id, comment_id: commentId}})
 		}
 	},
 	created() {

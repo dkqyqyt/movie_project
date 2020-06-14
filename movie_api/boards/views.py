@@ -47,9 +47,13 @@ def detail(request, article_pk):
         comment_serializer = CommentListSerializer(comments, many=True)
         return Response((article_serializer.data, comment_serializer.data))
     elif request.method == "DELETE" :
+        if not request.user == article.user:
+            return Response({' 삭제할 권한이 없습니다. '})
         article.delete()
         return Response({' 성공적으로 삭제되었습니다.'})
     elif request.method == "PUT" :
+        if not request.user == article.user:
+            return Response({ '수정할 권한이 없습니다. '})
         serializer = ArticleSerializer(article, data = request.data)
         if serializer.is_valid():
             serializer.save()
@@ -63,10 +67,10 @@ def update(request, article_pk):
 # article 에 대한 comment 작성
 @api_view(['POST'])
 def comment_create(request, article_pk):
-    comments = Comment.objects.filter(article = article_pk)
+    article = get_object_or_404(Article, pk=article_pk)
     serializer = CommentSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        serializer.save(user=request.user, comment = comment)
+        serializer.save(user=request.user, article=article)
         return Response(serializer.data)
     return Response(serializer.data)
 
