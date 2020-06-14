@@ -8,6 +8,7 @@
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
         <div class="navbar-nav" v-if="isLoggedIn">
           <router-link class="nav-item nav-link" :to="{ name: 'MovieList' }">Movie</router-link>
+          <router-link v-if="isAdmin" class="nav-item nav-link" :to="{ name: 'MovieCreate' }">Movie Create</router-link>
           <router-link class="nav-item nav-link" :to="{ name: 'ArticleList' }">Article</router-link>
           <router-link class="nav-item nav-link" :to="{ name: 'Logout' }">Logout</router-link>
         </div>
@@ -18,18 +19,18 @@
           <router-link class="nav-item nav-link" :to="{ name: 'Signup' }">Signup</router-link>
         </div>
       </div>
-    </nav>
-      <router-link :to="{ name: 'MovieCreate' }">Movie Create</router-link>
+    </nav>    
     <router-view class="container"/>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 export default {
   name: 'App',
   computed: {
-    ...mapGetters('CommunityModule',['isLoggedIn'])
+    ...mapGetters('CommunityModule',['isLoggedIn']),
+    ...mapState('CommunityModule', ['isAdmin'])
   }
 }
 </script>

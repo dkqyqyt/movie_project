@@ -14,8 +14,8 @@
         <tbody>
             <tr v-for="(article,idx) in articles" :key="article.id">
                 <th scope="row">{{ idx + 1 }}</th>
-                <td>{{ article.title }}</td>
-                <td>{{ article.movie.title }}</td>
+                <td @click="moveToArticleDetail(article.id)" class="article-title">{{ article.title }}</td>
+                <td @click="moveToMovie(article.movie.id)" class="article-movie">{{ article.movie.title }}</td>
                 <td>{{ article.user.username }}</td>
                 <td>{{ article.created_at }}</td>
             </tr>
@@ -30,10 +30,19 @@ import { mapActions, mapState } from 'vuex'
 export default {
     name: 'ArticleListView',
     computed: {
-        ...mapState('CommunityModule',['articles','comments'])
+        ...mapState('CommunityModule',['articles','comments']),
+        movieId() {
+            return this.$route.params.movie_id
+        }
     },
     methods: {
-        ...mapActions('CommunityModule',['fetchArticles'])
+        ...mapActions('CommunityModule',['fetchArticles']),
+        moveToMovie(movieId) {
+            this.$router.push({ name: 'MovieDetail', params: {id: movieId}})
+        },
+        moveToArticleDetail(articleId) {
+            this.$router.push({ name: 'ArticleDetail', params: {movie_id: this.movieId, article_id: articleId}})
+        },
     },
     created() {
         this.fetchArticles()
@@ -41,6 +50,13 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+    td.article-title:hover {
+        cursor: pointer;
+        color: blue
+    }
+    td.article-movie:hover {
+        cursor: pointer;
+        color: blue;
+    }
 </style>

@@ -9,7 +9,7 @@ class ArticleListSerializer(serializers.ModelSerializer):
     created_at = serializers.DateTimeField(format="%Y년 %m월 %d일 %H:%M:%S") 
     class Meta:
         model = Article
-        fields = ['id', 'title', 'user', 'created_at', 'movie']
+        fields = '__all__'
 
 class ArticleSerializer(serializers.ModelSerializer):
     user = UserSerializer(required=False)

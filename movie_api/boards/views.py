@@ -41,8 +41,10 @@ def boards_movies(request, movie_pk):
 def detail(request, article_pk):
     article = get_object_or_404(Article, pk = article_pk)
     if request.method == "GET" :
-        serializer = ArticleListSerializer(article)
-        return Response(serializer.data)
+        comments = Comment.objects.filter(article = article_pk)
+        article_serializer = ArticleListSerializer(article)
+        comment_serializer = CommentListSerializer(comments, many=True)
+        return Response((article_serializer.data, comment_serializer.data))
     elif request.method == "DELETE" :
         article.delete()
         return Response({' 성공적으로 삭제되었습니다.'})
