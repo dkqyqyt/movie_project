@@ -21,7 +21,7 @@
 	<ul>
 		<li v-for="comment in comments" :key="comment.id">
 			{{ comment.content }}
-			<button>삭제</button>
+			<button @click="deleteComment(comment.id)">삭제</button>
 		</li>
 	</ul>
   </div>
@@ -43,7 +43,7 @@ export default {
 			commentData: {
 				content: null,
 				articleId: this.$route.params.article_id
-			}
+			},
 		}
 	},
 	methods: {
@@ -56,6 +56,10 @@ export default {
 		},
 		createComment() {
 			this.$router.push({ name: 'CommentCreate', params: { article_id: this.$route.params.article_id }, query: { commentData: this.commentData }})
+		},
+		deleteComment(commentId) {
+			console.log(commentId)
+			this.$router.push({ name: 'CommentDelete', params: { article_id: this.$route.params.article_id, comment_id: commentId}})
 		}
 	},
 	created() {

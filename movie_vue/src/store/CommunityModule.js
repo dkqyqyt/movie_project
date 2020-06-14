@@ -214,8 +214,22 @@ export default{
           router.push({ name: 'ArticleDetail', params: { article_id: articleId }})
         })
         .catch(err => console.log(err.response.data))
-    }
+    },
+    deleteComment({ state }, idData) {
+      const articleId = idData.articleId
+      const commentId = idData.commentId
 
+      axios.delete(
+        SERVER.URL + SERVER.ROUTES.getArticleDetail + articleId + SERVER.ROUTES.deleteComment + commentId +'/',{
+        headers: {
+          Authorization: `JWT ${state.authToken}`
+        }
+      })
+      .then(() => {
+        router.push({ name: 'ArticleDetail', params: { article_id: articleId }})
+      })
+      .catch(err => console.log(err.response.data))
+    }
   },
   modules: {
 

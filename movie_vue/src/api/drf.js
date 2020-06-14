@@ -11,6 +11,7 @@ export default {
         getArticles: '/boards/',
         createArticle: '/boards/create/',
         getArticleDetail: '/boards/',
-        createComment: '/comments/create/'
+        createComment: '/comments/create/',
+        deleteComment: '/comments/delete/'
     }
 }
