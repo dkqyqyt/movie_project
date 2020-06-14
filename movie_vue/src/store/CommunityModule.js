@@ -9,22 +9,28 @@ export default{
     namespaced: true,
   state: {
     authToken: cookies.get('auth-token'),
+    isAdmin: false,
     movies: [],
     articles: [],
     comments: [],
     selectedMovie: null,
+    selectedArticle: null,
   },
   getters: {
     isLoggedIn: state => !!state.authToken,
-    config: state => ({ headers: { Authorization: `Token ${state.authToken}`}}),
-    getMovieById: (state) => (id) => {
-      return state.movies.find(movie => movie.id === id)
-    } 
+    config: state => ({ headers: { Authorization: `JWT ${state.authToken}`}}),
   },
   mutations: {
     SET_TOKEN(state, token) {
       state.authToken = token
       cookies.set('auth-token', token)
+    },
+    SET_ISADMIN(state, bool) {
+        if(bool) {
+            state.isAdmin = true
+        }else {
+            state.isAdmin = false
+        }
     },
     SET_MOVIES(state, movies) {
       state.movies = movies
@@ -41,6 +47,9 @@ export default{
     SET_ARTICLES(state, articles) {
       state.articles = articles
     },
+    SELECT_ARTICLE(state, article) {
+        state.selectedArticle = article
+    },
     SET_COMMENTS(state, comments) {
       state.comments = comments
     }
@@ -50,7 +59,8 @@ export default{
       axios.post(SERVER.URL + info.location, info.data)
         .then(res => {
             console.log(res)
-          commit('SET_TOKEN', res.data.key)
+          commit('SET_TOKEN', res.data.token)
+          commit('SET_ISADMIN', res.data.user.is_superuser)
           router.push({ name: 'Home' })
         })
         .catch(err => console.log(err.response.data))
@@ -73,6 +83,7 @@ export default{
       axios.post(SERVER.URL + SERVER.ROUTES.logout, null, getters.config)
         .then(() => {
           commit('SET_TOKEN', null)
+          commit('SET_ISADMIN', false)
           cookies.remove('auth-token')
           router.push({ name: 'Home' })
         })
@@ -112,7 +123,7 @@ export default{
       axios.delete(SERVER.URL + SERVER.ROUTES.movieDetail + movieId +'/', null, getters.config)
         .then(res => {
             console.log(res)
-          alert(res)
+        //   alert(res)
 
           router.push({ name: 'MovieList'})
         })
@@ -149,6 +160,15 @@ export default{
           router.push({ name: 'ArticleList' })
         })
         .catch(err => console.log(err.response.data))
+    },
+    getArticleDetail({ commit } , articleId) {
+        axios.get(SERVER.URL + SERVER.ROUTES.getArticleDetail + articleId + '/')
+            .then(res => {
+                console.log(res)
+                commit('SELECT_ARTICLE', res.data[0])
+                commit('SET_COMMENTS', res.data[1])
+            })
+            .catch(err => console.log(err.response.data))
     }
   },
   modules: {

@@ -13,6 +13,7 @@ import MovieDeleteView from '../views/movies/MovieDeleteView.vue'
 
 import ArticleListView from '../views/boards/ArticleListView.vue'
 import ArticleCreateView from '../views/boards/ArticleCreateView.vue'
+import ArticleDetailView from '../views/boards/ArticleDetailView.vue'
 
 Vue.use(VueRouter)
 
@@ -63,9 +64,14 @@ Vue.use(VueRouter)
     component: ArticleListView
   },
   {
-    path: '/boards/create/:movie_id',
+    path: '/boards/create/:movie_id/:article_id?',
     name: 'ArticleCreate',
     component: ArticleCreateView
+  },
+  {
+    path: '/boards/:article_id',
+    name: 'ArticleDetail',
+    component: ArticleDetailView
   }
 ]
 

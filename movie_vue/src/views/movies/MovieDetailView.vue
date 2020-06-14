@@ -14,8 +14,8 @@
             <div class="d-flex justify-content-between">
                 <button class="btn btn-primary" @click="createArticle">후기 작성</button>
                 <div>
-                    <button class="btn btn-secondary" @click="updateMovie">수정</button>
-                    <button class="btn btn-danger" @click="deleteMovie">삭제</button>
+                    <button v-if="isAdmin" class="btn btn-secondary" @click="updateMovie">수정</button>
+                    <button v-if="isAdmin" class="btn btn-danger" @click="deleteMovie">삭제</button>
                 </div>
             </div>
         </div>
@@ -29,7 +29,7 @@ import { mapActions, mapState } from 'vuex'
 export default {
     name: 'MovieDetailView',
     computed: {
-        ...mapState('CommunityModule',['selectedMovie'])
+        ...mapState('CommunityModule',['selectedMovie', 'isAdmin'])
     },
     methods: {
         ...mapActions('CommunityModule',['getMovieDetail']),

@@ -41,7 +41,7 @@ def detail(request, movie_pk):
         
 
 @api_view(['POST'])
-# @permission_classes([IsAdminUser])
+@permission_classes([IsAdminUser])
 def create(request):
     print(request.user)
     genres = Genre.objects.all()
