@@ -199,6 +199,21 @@ export default{
           router.push({ name: 'ArticleList' })
         })
         .catch(err => console.log(err.response.data))
+    },
+    createComment({ getters }, commentData) {
+      const articleId = commentData.articleId
+      delete commentData.articleId
+
+      axios.post(
+        SERVER.URL + SERVER.ROUTES.getArticleDetail + articleId + SERVER.ROUTES.createComment,
+        commentData,
+        getters.config
+        )
+        .then(res => {
+          console.log(res)
+          router.push({ name: 'ArticleDetail', params: { article_id: articleId }})
+        })
+        .catch(err => console.log(err.response.data))
     }
 
   },

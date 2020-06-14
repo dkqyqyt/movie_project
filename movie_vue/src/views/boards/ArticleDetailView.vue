@@ -17,7 +17,7 @@
 	Comments<br>
 	<label for="comment"></label>
 	<textarea v-model="commentData.content" id="comment" cols="100" rows="3"></textarea>
-	<button>댓글 작성</button>
+	<button @click="createComment(commentData)">댓글 작성</button>
 	<ul>
 		<li v-for="comment in comments" :key="comment.id">
 			{{ comment.content }}
@@ -41,18 +41,19 @@ export default {
 	data() {
 		return {
 			commentData: {
-				content: null
+				content: null,
+				articleId: this.$route.params.article_id
 			}
 		}
 	},
 	methods: {
-		...mapActions('CommunityModule',['getArticleDetail']),
+		...mapActions('CommunityModule',['getArticleDetail', 'createComment']),
 		moveToUpdate() {
 			this.$router.push({ name: 'ArticleCreate', params: { movie_id: this.movieId, article_id: this.$route.params.article_id}})
 		},
 		moveToDelete() {
 			this.$router.push({ name: 'ArticleDelete', params: { article_id: this.$route.params.article_id }})
-		}
+		},
 	},
 	created() {
 		this.getArticleDetail(this.$route.params.article_id)

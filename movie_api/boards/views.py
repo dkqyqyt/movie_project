@@ -67,10 +67,10 @@ def update(request, article_pk):
 # article 에 대한 comment 작성
 @api_view(['POST'])
 def comment_create(request, article_pk):
-    comments = Comment.objects.filter(article = article_pk)
+    article = get_object_or_404(Article, pk=article_pk)
     serializer = CommentSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
-        serializer.save(user=request.user, comment = comment)
+        serializer.save(user=request.user, article=article)
         return Response(serializer.data)
 
     return Response(serializer.data)
