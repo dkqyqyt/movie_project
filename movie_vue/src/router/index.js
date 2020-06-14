@@ -10,10 +10,10 @@ import MovieListView from '../views/movies/MovieListView.vue'
 import MovieCreateView from '../views/movies/MovieCreateView.vue'
 import MovieDetailView from '../views/movies/MovieDetailView.vue'
 import MovieDeleteView from '../views/movies/MovieDeleteView.vue'
-import MovieUpdateView from '../views/movies/MovieUpdateView.vue'
 
 import ArticleListView from '../views/boards/ArticleListView.vue'
 import ArticleCreateView from '../views/boards/ArticleCreateView.vue'
+import ArticleDetailView from '../views/boards/ArticleDetailView.vue'
 
 Vue.use(VueRouter)
 
@@ -44,7 +44,7 @@ Vue.use(VueRouter)
     component: MovieListView
   },
   {
-    path: '/movies/create',
+    path: '/movies/create/:movie_id?',
     name: 'MovieCreate',
     component: MovieCreateView
   },
@@ -59,19 +59,19 @@ Vue.use(VueRouter)
     component: MovieDeleteView
   },
   {
-    path: '/movies/:id/update',
-    name: 'MovieUpdate',
-    component: MovieUpdateView
-  },
-  {
     path: '/boards',
     name: 'ArticleList',
     component: ArticleListView
   },
   {
-    path: '/boards/create/:movie_id',
+    path: '/boards/create/:movie_id/:article_id?',
     name: 'ArticleCreate',
     component: ArticleCreateView
+  },
+  {
+    path: '/boards/:article_id',
+    name: 'ArticleDetail',
+    component: ArticleDetailView
   }
 ]
 

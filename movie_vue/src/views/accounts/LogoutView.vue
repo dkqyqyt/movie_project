@@ -10,7 +10,7 @@ import { mapActions } from 'vuex'
 export default {
     name: 'LogoutView',
     methods: {
-        ...mapActions(['logout'])
+        ...mapActions('CommunityModule',['logout'])
     },
     created() {
         this.logout()

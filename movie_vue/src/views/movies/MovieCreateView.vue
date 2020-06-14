@@ -1,6 +1,7 @@
 <template>
   <div>
-      <h1 class="text-center">영화 생성</h1>
+      <h1 class="text-center" v-if="isUpdate">영화 수정</h1>
+      <h1 class="text-center" v-else>영화 생성</h1>
       <div class="movie-create-form">
         <div class="form-group">
             <label for="title">title</label>
@@ -125,16 +126,23 @@
                 <label class="form-check-label" for="adult">서부</label>
             </div>
         </div>
-        <button class="btn btn-primary" @click="createMovie(movieData)">생성</button>
+        <button v-if="isUpdate" class="btn btn-primary" @click="updateMovie(movieData)">수정</button>
+        <button v-else class="btn btn-primary" @click="createMovie(movieData)">생성</button>
       </div>
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
     name: 'MovieCreateView',
+    computed: {
+        ...mapState('CommunityModule',['selectedMovie']),
+        isUpdate() {
+            return this.$route.params.movie_id
+        }
+    },
     data() {
         return {
             movieData: {
@@ -150,11 +158,33 @@ export default {
                 poster_path: null,
                 backdrop_path: null,
                 genres: [],
+                movieId: this.$route.params.movie_id,
             },
         }
     },
     methods: {
-        ...mapActions(['createMovie']),
+        ...mapActions('CommunityModule',['createMovie','updateMovie']),
+        mapStateData() {
+            this.movieData.title = this.selectedMovie.title
+            this.movieData.original_title = this.selectedMovie.original_title
+            this.movieData.release_date = this.selectedMovie.release_date
+            this.movieData.popularity = this.selectedMovie.popularity
+            this.movieData.vote_count = this.selectedMovie.vote_count
+            this.movieData.vote_average = this.selectedMovie.vote_average
+            this.movieData.adult = this.selectedMovie.adult
+            this.movieData.overview = this.selectedMovie.overview
+            this.movieData.original_language = this.selectedMovie.original_language
+            this.movieData.poster_path = this.selectedMovie.poster_path
+            this.movieData.backdrop_path = this.selectedMovie.backdrop_path
+            for(var i= 0; i < this.selectedMovie.genres.length;i++) {
+                this.movieData.genres.push(this.selectedMovie.genres[i].name)
+            }
+        }
+    },
+    created() {
+        if(this.$route.params.movie_id) {
+            this.mapStateData()
+        }
     }
 }
 </script>

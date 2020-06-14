@@ -7,15 +7,15 @@
             <p>{{ selectedMovie.original_title }}, {{ selectedMovie.release_date }}</p>
             <hr>
             <h5>장르</h5>
-            <span class="badge badge-info genre" v-for="genre in selectedMovie.genres" :key="genre">{{ genre.name }}</span>
+            <span class="badge badge-info genre" v-for="genre in selectedMovie.genres" :key="genre.id">{{ genre.name }}</span>
             <hr>
             <h5 v-if="selectedMovie.overview">줄거리</h5>
             <p>{{ selectedMovie.overview }}</p>
             <div class="d-flex justify-content-between">
                 <button class="btn btn-primary" @click="createArticle">후기 작성</button>
                 <div>
-                    <button class="btn btn-secondary" @click="updateMovie">수정</button>
-                    <button class="btn btn-danger" @click="deleteMovie">삭제</button>
+                    <button v-if="isAdmin" class="btn btn-secondary" @click="updateMovie">수정</button>
+                    <button v-if="isAdmin" class="btn btn-danger" @click="deleteMovie">삭제</button>
                 </div>
             </div>
         </div>
@@ -29,15 +29,15 @@ import { mapActions, mapState } from 'vuex'
 export default {
     name: 'MovieDetailView',
     computed: {
-        ...mapState(['selectedMovie'])
+        ...mapState('CommunityModule',['selectedMovie', 'isAdmin'])
     },
     methods: {
-        ...mapActions(['getMovieDetail']),
+        ...mapActions('CommunityModule',['getMovieDetail']),
         deleteMovie() {
             this.$router.push({ name: 'MovieDelete' })
         },
         updateMovie() {
-            this.$router.push({ name: 'MovieUpdate'})
+            this.$router.push({ name: 'MovieCreate', params: { movie_id: this.$route.params.id }})
         },
         createArticle() {
             this.$router.push({ name: 'ArticleCreate', params:{ movie_id: this.$route.params.id}})

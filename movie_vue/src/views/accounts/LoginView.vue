@@ -27,7 +27,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['login'])
+        ...mapActions('CommunityModule',['login'])
     }
 }
 </script>

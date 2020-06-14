@@ -22,15 +22,15 @@ import { mapActions,mapState } from 'vuex'
 export default {
     name:'MovieListView',
     computed: {
-        ...mapState(['movies'])
+        ...mapState('CommunityModule',['movies'])
     },
     methods: {
-        ...mapActions(['fetchMovies']),
+        ...mapActions('CommunityModule',['fetchMovies']),
         movieDetail(movieId) {
             this.$router.push({ name: 'MovieDetail', params: { id: movieId}})
         },
     },
-    created() {
+    mounted() {
         this.fetchMovies()
     }
 }
