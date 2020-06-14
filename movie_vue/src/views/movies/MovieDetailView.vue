@@ -12,10 +12,13 @@
             <h5 v-if="selectedMovie.overview">줄거리</h5>
             <p>{{ selectedMovie.overview }}</p>
             <div class="d-flex justify-content-between">
-                <button class="btn btn-primary" @click="createArticle">후기 작성</button>
                 <div>
-                    <button v-if="isAdmin" class="btn btn-secondary" @click="updateMovie">수정</button>
-                    <button v-if="isAdmin" class="btn btn-danger" @click="deleteMovie">삭제</button>
+                    <button class="btn btn-primary" @click="createArticle">후기 작성</button>
+                    <button class="btn btn-primary" @click="getArticleByMovie">관련 게시글 보기</button>
+                </div>
+                <div v-if="isAdmin">
+                    <button class="btn btn-secondary" @click="updateMovie">수정</button>
+                    <button class="btn btn-danger" @click="deleteMovie">삭제</button>
                 </div>
             </div>
         </div>
@@ -41,6 +44,9 @@ export default {
         },
         createArticle() {
             this.$router.push({ name: 'ArticleCreate', params:{ movie_id: this.$route.params.id}})
+        },
+        getArticleByMovie() {
+            this.$router.push({ name: 'ArticleListByMovie', params: { movie_id: this.$route.params.id }})
         }
     },
     created() {
@@ -50,5 +56,7 @@ export default {
 </script>
 
 <style scoped>
-
+    button {
+        margin: 0 2px;
+    }
 </style>

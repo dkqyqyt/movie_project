@@ -8,6 +8,10 @@
           <input class="form-control" v-model="articleData.title" id="title" type="text">
       </div>
       <div class="form-group">
+          <label for="rating">rating</label>
+          <input class="form-control" v-model="articleData.rating" id="title" type="number" min=1 max=10>
+      </div>
+      <div class="form-group">
           <label for="content">content</label>
           <textarea class="form-control" v-model="articleData.content" id="content" cols="30" rows="10"></textarea>
       </div>
@@ -32,6 +36,7 @@ export default {
             articleData: {
                 title: null,
                 content: null,
+                rating: null,
                 movieId: this.$route.params.movie_id,
                 articleId: this.$route.params.article_id
             },

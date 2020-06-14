@@ -16,6 +16,7 @@ export default{
     comments: [],
     selectedMovie: null,
     selectedArticle: null,
+    articlesByMovie: [],
   },
   getters: {
     isLoggedIn: state => !!state.authToken,
@@ -56,6 +57,9 @@ export default{
     },
     SET_COMMENTS(state, comments) {
       state.comments = comments
+    },
+    SET_ARTICLES_BY_MOVIE(state, articles) {
+      state.articlesByMovie = articles
     }
   },
   actions: {
@@ -154,11 +158,19 @@ export default{
         })
         .catch(err => console.log(err.response.data))
     },
+    getArticlesByMovie({ commit }, movieId) {
+      axios.get(SERVER.URL + SERVER.ROUTES.getArticlesByMovie + movieId + '/')
+        .then(res => {
+          commit('SET_ARTICLES_BY_MOVIE', res.data)
+        })
+        .catch(err => console.log(err.response.data))
+    },
     createArticle({ getters }, articleData) {
       const movieId = articleData.movieId
       const newArticleData = {
         title: articleData.title,
-        content: articleData.content
+        content: articleData.content,
+        rating: articleData.rating
       }
       console.log(articleData)
       axios.post(SERVER.URL + SERVER.ROUTES.createArticle + movieId + '/', newArticleData, getters.config)
