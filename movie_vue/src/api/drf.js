@@ -9,6 +9,7 @@ export default {
         movieDetail: '/movies/',
         updateMovie: '/update/',
         getArticles: '/boards/',
+        getArticlesByMovie: '/boards/movies/',
         createArticle: '/boards/create/',
         getArticleDetail: '/boards/',
         createComment: '/comments/create/',

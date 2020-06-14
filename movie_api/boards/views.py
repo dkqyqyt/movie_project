@@ -39,6 +39,7 @@ def boards_movies(request, movie_pk):
     
 # 전체게시글 R D U
 @api_view(['GET', 'DELETE', 'PUT'])
+@permission_classes([IsAuthenticated])
 def detail(request, article_pk):
     article = get_object_or_404(Article, pk = article_pk)
     if request.method == "GET" :

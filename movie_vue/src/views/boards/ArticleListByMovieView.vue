@@ -1,6 +1,6 @@
 <template>
   <div>
-      <h1 class="text-center">게시글</h1>
+      <h1 class="text-center">{{ selectedMovie.title }}</h1>
       <table class="table">
         <thead class="thead-dark">
             <tr>
@@ -13,7 +13,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="(article,idx) in articles" :key="article.id">
+            <tr v-for="(article,idx) in articlesByMovie" :key="article.id">
                 <th scope="row">{{ idx + 1 }}</th>
                 <td @click="moveToArticleDetail(article.id)" class="article-title">{{ article.title }}</td>
                 <td @click="moveToMovie(article.movie.id)" class="article-movie">{{ article.movie.title }}</td>
@@ -30,35 +30,19 @@
 import { mapActions, mapState } from 'vuex'
 
 export default {
-    name: 'ArticleListView',
+    name: 'ArticleListByMovieView',
     computed: {
-        ...mapState('CommunityModule',['articles','comments']),
-        movieId() {
-            return this.$route.params.movie_id
-        }
+        ...mapState('CommunityModule',['articlesByMovie','selectedMovie'])
     },
     methods: {
-        ...mapActions('CommunityModule',['fetchArticles']),
-        moveToMovie(movieId) {
-            this.$router.push({ name: 'MovieDetail', params: {id: movieId}})
-        },
-        moveToArticleDetail(articleId) {
-            this.$router.push({ name: 'ArticleDetail', params: {movie_id: this.movieId, article_id: articleId}})
-        },
+        ...mapActions('CommunityModule',['getArticlesByMovie'])
     },
     created() {
-        this.fetchArticles()
+        this.getArticlesByMovie(this.$route.params.movie_id)
     }
 }
 </script>
 
-<style scoped>
-    td.article-title:hover {
-        cursor: pointer;
-        color: blue
-    }
-    td.article-movie:hover {
-        cursor: pointer;
-        color: blue;
-    }
+<style>
+
 </style>

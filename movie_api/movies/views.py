@@ -9,6 +9,7 @@ from .models import Movie, Genre
 
 @api_view(['GET'])
 def index(request):
+    print(request.GET)
     movies = Movie.objects.order_by('-vote_average')
     serializers = MovieListSerializer(movies, many=True)
     return Response(serializers.data)
