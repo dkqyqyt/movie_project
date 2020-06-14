@@ -21,13 +21,13 @@ def detail(request, movie_pk):
         serializer = MovieListSerializer(movie)
         return Response(serializer.data)
     if request.method == 'DELETE':
-        # if not request.user.is_superuser:
-        #     return Response({'삭제할 권한이 없습니다.'})
+        if not request.user.is_superuser:
+            return Response({'삭제할 권한이 없습니다.'})
         movie.delete()
         return Response({'성공적으로 삭제되었습니다.'})
     if request.method == 'PUT':
-        # if not request.user.is_superuser:
-        #     return Response({'수정할 권한이 없습니다.'})
+        if not request.user.is_superuser:
+            return Response({'수정할 권한이 없습니다.'})
         genres = Genre.objects.all()
         print(request.data)
         for i in range(len(request.data['genres'])):
@@ -58,6 +58,7 @@ def create(request):
         return Response(serializer.data)
 
 @api_view(['GET'])
+@permission_classes([IsAdminUser])
 def update(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     serializer = MovieListSerializer(movie)

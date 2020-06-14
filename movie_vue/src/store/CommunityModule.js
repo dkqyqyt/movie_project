@@ -119,12 +119,14 @@ export default{
                 })
             .catch(err => console.log(err.response.data))
     },
-    deleteMovie({ getters }, movieId) {
-      axios.delete(SERVER.URL + SERVER.ROUTES.movieDetail + movieId +'/', null, getters.config)
+    deleteMovie({ state } , movieId) {
+      axios.delete(SERVER.URL + SERVER.ROUTES.movieDetail + movieId +'/', { 
+          headers: {
+              Authorization: `JWT ${state.authToken}`
+          } 
+        })
         .then(res => {
             console.log(res)
-        //   alert(res)
-
           router.push({ name: 'MovieList'})
         })
         .catch(err => console.log(err.response.data))
