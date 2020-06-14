@@ -10,6 +10,7 @@ export default{
   state: {
     authToken: cookies.get('auth-token'),
     isAdmin: false,
+    loginUsername: null,
     movies: [],
     articles: [],
     comments: [],
@@ -31,6 +32,9 @@ export default{
         }else {
             state.isAdmin = false
         }
+    },
+    SET_USERNAME(state, name) {
+        state.loginUsername = name
     },
     SET_MOVIES(state, movies) {
       state.movies = movies
@@ -61,6 +65,7 @@ export default{
             console.log(res)
           commit('SET_TOKEN', res.data.token)
           commit('SET_ISADMIN', res.data.user.is_superuser)
+          commit('SET_USERNAME', res.data.user.username)
           router.push({ name: 'Home' })
         })
         .catch(err => console.log(err.response.data))
