@@ -3,7 +3,7 @@
       <h1 class="text-center">영화 정보</h1>
       <div class="mt-5" v-if="selectedMovie">
         <div class="movie-item">
-            <!-- <img :src="'http://image.tmdb.org/t/p/w185/'+ selectedMovie.poster_path" class="card-img-top" alt="영화 포스터"> -->
+            <img :src="'http://image.tmdb.org/t/p/original/'+ selectedMovie.poster_path" class="card-img-top" alt="영화 포스터">
             <h3>{{ selectedMovie.title }} <span class="badge badge-info">{{ selectedMovie.vote_average }}</span></h3>
             <p>{{ selectedMovie.original_title }}, {{ selectedMovie.release_date }}</p>
             <hr>
