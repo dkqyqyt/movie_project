@@ -32,7 +32,7 @@ def recommendations(title):
 
     score_series = pd.Series(cosine_sim[idx]).sort_values(ascending=True)
 
-    top_10_indexes = list(score_series.iloc[1:11].index)
+    top_10_indexes = list(score_series.iloc[1:13].index)
     for i in top_10_indexes:
         recommended_movies.append(list(df.id)[i])
 
@@ -96,7 +96,7 @@ def update(request, movie_pk):
     return Response(serializer.data)
 
 @api_view(['GET'])
-# @permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated])
 def recommend(request, movie_pk):
     movie = get_object_or_404(Movie,pk = movie_pk)
     print(movie)

@@ -8,7 +8,10 @@
         <div class="form-group">
             <input class="form-control" @keypress.enter="login(loginData)" v-model="loginData.password" id="password" type="password" placeholder="비밀번호">
         </div>
-        <button class="btn btn-primary" @click="login(loginData)">로그인</button>
+        <div class="d-flex justify-content-between">
+            <button class="btn btn-primary" @click="login(loginData)">로그인</button>
+            <button class="btn btn-success" @click="moveToSignup">회원가입</button>
+        </div>
       </div>
   </div>
 </template>
@@ -23,11 +26,15 @@ export default {
             loginData: {
                 username: null,
                 password: null,
-            }
+                redirectUrl: this.$route.query.redirect
+            },
         }
     },
     methods: {
-        ...mapActions('CommunityModule',['login'])
+        ...mapActions('CommunityModule',['login']),
+        moveToSignup() {
+            this.$router.push({ name: 'Signup' })
+        }
     }
 }
 </script>
@@ -36,5 +43,8 @@ export default {
     div.login-form {
         width: 50%;
         margin: 30px auto;
+    }
+    div.signup {
+        background-color: #313288 ;
     }
 </style>
