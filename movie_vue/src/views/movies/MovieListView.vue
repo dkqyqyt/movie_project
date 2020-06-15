@@ -8,7 +8,9 @@
                 <div class="card-body">
                     <h5 class="card-title">{{ movie.title }} <span class="badge badge-info">{{ movie.vote_average }}</span></h5>
                     <h5>개봉일 : {{ movie.release_date }}</h5>
+                    <div class="text-center">
                     <button class="btn btn-warning" @click="movieDetail(movie.id)">상세 정보 보기</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -42,5 +44,9 @@ export default {
     }
     div.card {
         margin: 5px 0;
+    }
+    div.btn btn-warning {
+        margin: auto;
+        width: 50%;
     }
 </style>

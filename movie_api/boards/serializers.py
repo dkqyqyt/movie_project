@@ -23,9 +23,10 @@ class ArticleSerializer(serializers.ModelSerializer):
 
 class CommentListSerializer(serializers.ModelSerializer):
     user = UserSerializer()
+    created_at = serializers.DateTimeField(format="%Y-%m-%d - %H:%M:%S")
     class Meta:
         model = Comment
-        fields = ['id','content', 'user']
+        fields = ['id','content', 'user', 'created_at']
 
 class CommentSerializer(serializers.ModelSerializer):
     user = UserSerializer(required=False)
