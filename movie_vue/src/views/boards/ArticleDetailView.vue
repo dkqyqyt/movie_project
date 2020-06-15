@@ -1,20 +1,25 @@
 <template>
   <div>
-	<h1>Article Detail</h1>
-	<p>{{ selectedArticle.title }}</p>
-	<hr>
+	<h1 class="text-center">Article Detail</h1>
 	<p>작성자 : {{ selectedArticle.user.username }}</p>
 	<p>영화 : {{ selectedArticle.movie.title }}</p>
 	<hr>
-	<p>{{ selectedArticle.content}}</p>
+	<!-- <h1 class="ui header">{{ selectedArticle.title }}</h1> -->
+	<div class="ui segment">
+		<h2 class="ui left floated header">{{ selectedArticle.title }}</h2>
+		<div class="ui clearing divider"></div>
+	<p>{{ selectedArticle.content }}</p>
+	</div>
+	<!-- <hr>
+	<p>{{ selectedArticle.content}}</p> -->
 	<hr>
 	<p>작성일 : {{ selectedArticle.created_at }}</p>
 	<p>수정일 : {{ selectedArticle.updated_at }}</p>
 	<hr>
-	<button @click="moveToUpdate" v-if="loginUsername === selectedArticle.user.username">수정</button>
-	<button @click="moveToDelete" v-if="loginUsername === selectedArticle.user.username">삭제</button>
-	<hr>
-	Comments<br>
+	<button class="ui green button" @click="moveToUpdate" v-if="loginUsername === selectedArticle.user.username">수정</button>
+	<button class="ui red button" @click="moveToDelete" v-if="loginUsername === selectedArticle.user.username">삭제</button>
+	<!-- <hr> -->
+	<!-- Comments<br>
 	<label for="comment"></label>
 	<textarea v-model="commentData.content" id="comment" cols="100" rows="3"></textarea>
 	<button @click="createComment(commentData)">댓글 작성</button>
@@ -23,9 +28,31 @@
 			{{ comment.content }}
 			<button @click="deleteComment(comment.id)">삭제</button>
 		</li>
-	</ul>
+	</ul> -->
+	<div class="ui comments">
+		<h3 class="ui dividing header">Comments</h3>
+		<textarea v-model="commentData.content" placeholder="타인을 배려합시다 !" id="comment" cols="100" rows="3"></textarea>
+		<button class="ui primary button" @click="createComment(commentData)">댓글 작성</button>
+
+		<div v-for="comment in comments" :key="comment.id" class="comment">
+			<a class="avatar">
+			</a>
+			<div class="content">
+			<a class="author">{{ comment.user.username }}</a>
+			<div class="metadata">
+				<span class="date">{{ comment.created_at }}</span>
+				<button class="btn btn-danger" @click="deleteComment(comment.id)">삭제</button>
+			</div>
+			<div class="text">
+				{{comment.content}}
+			</div>
+			</div>
+		</div>
+		
+	</div>
   </div>
 </template>
+
 
 <script>
 import { mapActions, mapState } from 'vuex'

@@ -74,7 +74,6 @@ def comment_create(request, article_pk):
     if serializer.is_valid(raise_exception=True):
         serializer.save(user=request.user, article=article)
         return Response(serializer.data)
-
     return Response(serializer.data)
 
 # article에 대한 comment 삭제

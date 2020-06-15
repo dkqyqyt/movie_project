@@ -7,6 +7,7 @@
                 <th scope="col">#</th>
                 <th scope="col">제목</th>
                 <th scope="col">영화</th>
+                <!-- <th scope="col">장르</th> -->
                 <th scope="col">평점</th>
                 <th scope="col">작성자</th>
                 <th scope="col">작성일</th>
@@ -17,6 +18,7 @@
                 <th scope="row">{{ idx + 1 }}</th>
                 <td @click="moveToArticleDetail(article.id)" class="article-title">{{ article.title }}</td>
                 <td @click="moveToMovie(article.movie.id)" class="article-movie">{{ article.movie.title }}</td>
+                <!-- <td v-for="genre in genres" :key>{{ article.movie.genre }}</td> -->
                 <td>{{ article.rating }}</td>
                 <td>{{ article.user.username }}</td>
                 <td>{{ article.created_at }}</td>
