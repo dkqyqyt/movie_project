@@ -1,6 +1,6 @@
 <template>
   <div>
-	<h1 class="text-center">Article Detail</h1>
+	<h1 class="text-center">상세 게시글</h1>
 	<p>작성자 : {{ selectedArticle.user.username }}</p>
 	<p>영화 : {{ selectedArticle.movie.title }}</p>
 	<hr>
@@ -30,7 +30,7 @@
 		</li>
 	</ul> -->
 	<div class="ui comments">
-		<h3 class="ui dividing header">Comments</h3>
+		<h3 class="ui dividing header">댓글</h3>
 		<textarea v-model="commentData.content" placeholder="타인을 배려합시다 !" id="comment" cols="100" rows="3"></textarea>
 		<button class="ui primary button" @click="createComment(commentData)">댓글 작성</button>
 

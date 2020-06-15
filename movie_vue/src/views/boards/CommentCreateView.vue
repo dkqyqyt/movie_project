@@ -1,7 +1,5 @@
 <template>
   <div>
-      <h1>commentCreate</h1>
-      {{ commentData.content }}
   </div>
 </template>
 
