@@ -7,9 +7,39 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from .serializers import MovieSerializer, MovieListSerializer, GenreSerializer
 from .models import Movie, Genre
 
+import pandas as pd
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.feature_extraction.text import CountVectorizer
+
+import pandas as pd
+from django_pandas.io import read_frame
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.feature_extraction.text import CountVectorizer
+
+def recommendations(title):
+    df = read_frame(Movie.objects.all())
+    df = df[['title', 'overview','id']]
+
+    count = CountVectorizer()
+    count_matrix = count.fit_transform(df['overview'])
+
+    cosine_sim = cosine_similarity(count_matrix, count_matrix)
+
+    indices = pd.Series(df.title)
+    recommended_movies  = []
+
+    idx = indices[indices == title].index[0]
+
+    score_series = pd.Series(cosine_sim[idx]).sort_values(ascending=True)
+
+    top_10_indexes = list(score_series.iloc[1:11].index)
+    for i in top_10_indexes:
+        recommended_movies.append(list(df.id)[i])
+
+    return recommended_movies
+
 @api_view(['GET'])
 def index(request):
-    print(request.GET)
     movies = Movie.objects.order_by('-vote_average')
     serializers = MovieListSerializer(movies, many=True)
     return Response(serializers.data)
@@ -64,3 +94,21 @@ def update(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     serializer = MovieListSerializer(movie)
     return Response(serializer.data)
+
+@api_view(['GET'])
+# @permission_classes([IsAuthenticated])
+def recommend(request, movie_pk):
+    movie = get_object_or_404(Movie,pk = movie_pk)
+    print(movie)
+    movies_pk = recommendations(movie.title)
+    print(movies_pk)
+    movies = []
+
+    for moviePk in movies_pk:
+        selected_movie = get_object_or_404(Movie, pk=moviePk)
+        movies.append(selected_movie)
+
+    serializers = MovieListSerializer(movies, many=True)
+    return Response(serializers.data)
+
+

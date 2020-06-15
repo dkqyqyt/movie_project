@@ -17,6 +17,7 @@ export default{
     selectedMovie: null,
     selectedArticle: null,
     articlesByMovie: [],
+    recommendedMovies: [],
   },
   getters: {
     isLoggedIn: state => !!state.authToken,
@@ -60,6 +61,9 @@ export default{
     },
     SET_ARTICLES_BY_MOVIE(state, articles) {
       state.articlesByMovie = articles
+    },
+    SET_RECOMMEND_MOVIES(state, movies) {
+      state.recommendedMovies = movies
     }
   },
   actions: {
@@ -103,8 +107,12 @@ export default{
             router.push({ name: 'Home'})
         })
     },
-    fetchMovies({ commit }) {
-      axios.get(SERVER.URL + SERVER.ROUTES.getMovies)
+    fetchMovies({ commit,state }) {
+      axios.get(SERVER.URL + SERVER.ROUTES.getMovies, {
+        headers: {
+          Authorization: `JWT ${state.authToken}`
+        }
+      })
         .then(res => {
           console.log(res)
           commit('SET_MOVIES', res.data)
@@ -253,6 +261,20 @@ export default{
         router.push({ name: 'ArticleDetail', params: { article_id: articleId }})
       })
       .catch(err => console.log(err.response.data))
+    },
+    recommendMovies({ commit,state }, movieId) {
+      axios.get(SERVER.URL + SERVER.ROUTES.recommendMovie + movieId + '/', {
+        headers: {
+          Authorization: `JWT ${state.authToken}`
+        }
+      })
+        .then(res => {
+          console.log(res.data)
+          commit('SET_RECOMMEND_MOVIES', res.data)
+          router.push({ name: 'MovieRecommend', params: { movie_id: movieId }})
+        })
+        .catch(err => console.log(err.response.data))
+
     }
   },
   modules: {

@@ -13,6 +13,7 @@ export default {
         createArticle: '/boards/create/',
         getArticleDetail: '/boards/',
         createComment: '/comments/create/',
-        deleteComment: '/comments/delete/'
+        deleteComment: '/comments/delete/',
+        recommendMovie: '/movies/recommends/'
     }
 }

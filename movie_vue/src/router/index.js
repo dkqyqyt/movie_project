@@ -10,6 +10,7 @@ import MovieListView from '../views/movies/MovieListView.vue'
 import MovieCreateView from '../views/movies/MovieCreateView.vue'
 import MovieDetailView from '../views/movies/MovieDetailView.vue'
 import MovieDeleteView from '../views/movies/MovieDeleteView.vue'
+import MovieRecommendView from '../views/movies/MovieRecommendView.vue'
 
 import ArticleListView from '../views/boards/ArticleListView.vue'
 import ArticleListByMovieView from '../views/boards/ArticleListByMovieView.vue'
@@ -64,6 +65,11 @@ Vue.use(VueRouter)
     component: MovieDeleteView
   },
   {
+    path: '/recommends/:movie_id?',
+    name: 'MovieRecommend',
+    component: MovieRecommendView
+  },
+  {
     path: '/boards',
     name: 'ArticleList',
     component: ArticleListView
@@ -97,7 +103,7 @@ Vue.use(VueRouter)
     path: '/boards/:article_id/comments/delete/:comment_id',
     name: 'CommentDelete',
     component: CommentDeleteView
-  }
+  },
 ]
 
 const router = new VueRouter({
