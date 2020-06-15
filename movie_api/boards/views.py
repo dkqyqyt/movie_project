@@ -12,6 +12,7 @@ from .serializers import ArticleSerializer, ArticleListSerializer, CommentSerial
 
 # 전체 게시글 보기 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def index(request):
     articles = Article.objects.all()
     article_serializers = ArticleListSerializer(articles, many=True)
