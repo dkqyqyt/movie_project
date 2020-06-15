@@ -1,6 +1,5 @@
 <template>
   <div>
-      <h1>Comment Delete</h1>
   </div>
 </template>
 

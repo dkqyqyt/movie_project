@@ -72,15 +72,10 @@ export default{
       delete info.redirectUrl
       axios.post(SERVER.URL + info.location, info.data)
         .then(res => {
-            console.log(res)
           commit('SET_TOKEN', res.data.token)
           commit('SET_ISADMIN', res.data.user.is_superuser)
           commit('SET_USERNAME', res.data.user.username)
-          if(redirectUrl) {
-            router.push(redirectUrl)
-          }else {
-            router.push({ name: 'Home' })
-          }
+          router.replace(redirectUrl || { name: 'Home'})
         })
         .catch(err => console.log(err.response.data))
     },
@@ -107,19 +102,13 @@ export default{
           commit('SET_TOKEN', null)
           commit('SET_ISADMIN', false)
           cookies.remove('auth-token')
-          router.push({ name: 'Home' })
+          router.replace({ name: 'Home' })
         })
-        .catch(err => {
-            console.log(err)
-            commit('SET_TOKEN', null)
-            cookies.remove('auth-token')
-            router.push({ name: 'Home'})
-        })
+        .catch(err => console.log(err.response.data))
     },
     fetchMovies({ commit }) {
       axios.get(SERVER.URL + SERVER.ROUTES.getMovies)
         .then(res => {
-          console.log(res)
           commit('SET_MOVIES', res.data)
         })
         .catch(err => console.log(err.response.data))
@@ -131,7 +120,6 @@ export default{
         }
       })
         .then(res => {
-          console.log(res)
           commit('SET_MOVIES', res.data)
         })
         .catch(err => console.log(err.response.data))
@@ -140,17 +128,16 @@ export default{
       delete movieData.movieId
       axios.post(SERVER.URL + SERVER.ROUTES.createMovie, movieData, getters.config)
         .then(res => {
-          console.log(res.data)
-          router.push('/')
+          const movieId = res.data.id
+          router.push({ name: 'MovieDetail', params: { id: movieId}})
         })
         .catch(err => console.log(err.response.data))
     },
     getMovieDetail({ commit }, movieId) {
         axios.get(SERVER.URL + SERVER.ROUTES.getMovies + movieId + '/')
             .then(res => {
-                console.log(res.data)
                 commit('SELECT_MOVIE', res.data)
-                })
+            })
             .catch(err => console.log(err.response.data))
     },
     deleteMovie({ state } , movieId) {
@@ -159,18 +146,16 @@ export default{
               Authorization: `JWT ${state.authToken}`
           } 
         })
-        .then(res => {
-            console.log(res)
-          router.push({ name: 'MovieList'})
+        .then(() => {
+          router.replace({ name: 'MovieList'})
         })
         .catch(err => console.log(err.response.data))
     },
     updateMovie({ getters }, movieData) {
-        const movieId = movieData.movieId
-        delete movieData.movieId
+      const movieId = movieData.movieId
+      delete movieData.movieId
       axios.put(SERVER.URL + SERVER.ROUTES.movieDetail + movieId + '/', movieData, getters.config)
-        .then(res => {
-          console.log(res.data)
+        .then(() => {
           router.push({name: 'MovieDetail', params: { id: movieId }})
         })
         .catch(err => console.log(err.response.data))
@@ -182,7 +167,6 @@ export default{
         }
       })
         .then(res => {
-          console.log(res.data)
           commit('SET_ARTICLES', res.data)
         })
         .catch(err => console.log(err.response.data))
@@ -207,8 +191,7 @@ export default{
       }
       console.log(articleData)
       axios.post(SERVER.URL + SERVER.ROUTES.createArticle + movieId + '/', newArticleData, getters.config)
-        .then(res => {
-          console.log(res)
+        .then(() => {
           router.push({ name: 'ArticleList' })
         })
         .catch(err => console.log(err.response.data))
@@ -220,7 +203,6 @@ export default{
           }
         })
             .then(res => {
-                console.log(res)
                 commit('SELECT_ARTICLE', res.data[0])
                 commit('SET_COMMENTS', res.data[1])
             })
@@ -232,8 +214,7 @@ export default{
       delete articleData.articleId
       
       axios.put(SERVER.URL + SERVER.ROUTES.getArticleDetail + articleId + '/', articleData, getters.config)
-        .then(res => {
-          console.log(res)
+        .then(() => {
           router.push({ name: 'ArticleDetail', params: { article_id: articleId}})
         })
         .catch(err => console.log(err.response.data))
@@ -245,7 +226,7 @@ export default{
         }
       })
         .then(() => {
-          router.push({ name: 'ArticleList' })
+          router.replace({ name: 'ArticleList' })
         })
         .catch(err => console.log(err.response.data))
     },
@@ -258,9 +239,8 @@ export default{
         commentData,
         getters.config
         )
-        .then(res => {
-          console.log(res)
-          router.push({ name: 'ArticleDetail', params: { article_id: articleId }})
+        .then(() => {
+          router.replace({ name: 'ArticleDetail', params: { article_id: articleId }})
         })
         .catch(err => console.log(err.response.data))
     },
@@ -275,7 +255,7 @@ export default{
         }
       })
       .then(() => {
-        router.push({ name: 'ArticleDetail', params: { article_id: articleId }})
+        router.replace({ name: 'ArticleDetail', params: { article_id: articleId }})
       })
       .catch(err => console.log(err.response.data))
     },
@@ -286,7 +266,6 @@ export default{
         }
       })
         .then(res => {
-          console.log(res.data)
           commit('SET_RECOMMEND_MOVIES', res.data)
           router.push({ name: 'MovieRecommend', params: { movie_id: movieId }})
         })

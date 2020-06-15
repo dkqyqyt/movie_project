@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top" style="background-color: #e3f2fd;">
-      <router-link class="navbar-brand" to="/">Home</router-link>
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top mb-5" style="background-color: #e3f2fd;">
+      <router-link class="navbar-brand" to="/"><i class="fa fa-video"></i></router-link>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
