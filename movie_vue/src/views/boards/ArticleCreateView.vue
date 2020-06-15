@@ -47,6 +47,7 @@ export default {
         mapStateData() {
             this.articleData.title = this.selectedArticle.title
             this.articleData.content = this.selectedArticle.content
+            this.articleData.rating = this.selectedArticle.rating
         }
     },
     created() {
