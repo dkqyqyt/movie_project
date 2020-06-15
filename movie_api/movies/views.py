@@ -32,7 +32,7 @@ def recommendations(title):
 
     score_series = pd.Series(cosine_sim[idx]).sort_values(ascending=True)
 
-    top_10_indexes = list(score_series.iloc[1:11].index)
+    top_10_indexes = list(score_series.iloc[1:13].index)
     for i in top_10_indexes:
         recommended_movies.append(list(df.id)[i])
 
