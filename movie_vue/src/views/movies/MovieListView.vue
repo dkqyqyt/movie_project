@@ -2,7 +2,7 @@
   <div>
       <h1 class="text-center">영화</h1>
       <div class="movie-list-item row">
-        <div class="col-3" v-for="movie in movies" :key="movie.id">
+        <div class="col-lg-3 col-sm-6" v-for="movie in movies" :key="movie.id">
             <div class="card">
                 <img :src="'http://image.tmdb.org/t/p/w185/'+ movie.poster_path" class="card-img-top" alt="영화 포스터">
                 <div class="card-body">

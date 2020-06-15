@@ -1,6 +1,6 @@
 <template>
   <div>
-	<h1 class="text-center">Article Detail</h1>
+	<h1 class="text-center">상세 게시글</h1>
 	<p>작성자 : {{ selectedArticle.user.username }}</p>
 	<p>영화 : {{ selectedArticle.movie.title }}</p>
 	<hr>
@@ -30,7 +30,7 @@
 		</li>
 	</ul> -->
 	<div class="ui comments">
-		<h3 class="ui dividing header">Comments</h3>
+		<h3 class="ui dividing header">댓글</h3>
 		<textarea v-model="commentData.content" placeholder="타인을 배려합시다 !" id="comment" cols="100" rows="3"></textarea>
 		<button class="ui primary button" @click="createComment(commentData)">댓글 작성</button>
 
@@ -63,7 +63,10 @@ export default {
 		...mapState('CommunityModule',['selectedArticle','comments','loginUsername']),
 		movieId() {
 			return this.selectedArticle.movie.id
-		}
+		},
+		articleId() {
+			return this.$route.params.article_id
+		},
 	},
 	data() {
 		return {
@@ -76,21 +79,20 @@ export default {
 	methods: {
 		...mapActions('CommunityModule',['getArticleDetail']),
 		moveToUpdate() {
-			this.$router.push({ name: 'ArticleCreate', params: { movie_id: this.movieId, article_id: this.$route.params.article_id}})
+			this.$router.push({ name: 'ArticleCreate', params: { movie_id: this.movieId, article_id: this.articleId}})
 		},
 		moveToDelete() {
-			this.$router.push({ name: 'ArticleDelete', params: { article_id: this.$route.params.article_id }})
+			this.$router.push({ name: 'ArticleDelete', params: { article_id: this.articleId }})
 		},
 		createComment() {
-			this.$router.push({ name: 'CommentCreate', params: { article_id: this.$route.params.article_id }, query: { commentData: this.commentData }})
+			this.$router.push({ name: 'CommentCreate', params: { article_id: this.articleId }, query: { commentData: this.commentData }})
 		},
 		deleteComment(commentId) {
-			console.log(commentId)
-			this.$router.push({ name: 'CommentDelete', params: { article_id: this.$route.params.article_id, comment_id: commentId}})
+			this.$router.push({ name: 'CommentDelete', params: { article_id: this.articleId, comment_id: commentId}})
 		}
 	},
 	created() {
-		this.getArticleDetail(this.$route.params.article_id)
+		this.getArticleDetail(this.articleId)
 	}
 }
 </script>
