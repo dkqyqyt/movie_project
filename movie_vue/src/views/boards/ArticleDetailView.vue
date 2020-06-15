@@ -63,7 +63,10 @@ export default {
 		...mapState('CommunityModule',['selectedArticle','comments','loginUsername']),
 		movieId() {
 			return this.selectedArticle.movie.id
-		}
+		},
+		articleId() {
+			return this.$route.params.article_id
+		},
 	},
 	data() {
 		return {
@@ -76,21 +79,20 @@ export default {
 	methods: {
 		...mapActions('CommunityModule',['getArticleDetail']),
 		moveToUpdate() {
-			this.$router.push({ name: 'ArticleCreate', params: { movie_id: this.movieId, article_id: this.$route.params.article_id}})
+			this.$router.push({ name: 'ArticleCreate', params: { movie_id: this.movieId, article_id: this.articleId}})
 		},
 		moveToDelete() {
-			this.$router.push({ name: 'ArticleDelete', params: { article_id: this.$route.params.article_id }})
+			this.$router.push({ name: 'ArticleDelete', params: { article_id: this.articleId }})
 		},
 		createComment() {
-			this.$router.push({ name: 'CommentCreate', params: { article_id: this.$route.params.article_id }, query: { commentData: this.commentData }})
+			this.$router.push({ name: 'CommentCreate', params: { article_id: this.articleId }, query: { commentData: this.commentData }})
 		},
 		deleteComment(commentId) {
-			console.log(commentId)
-			this.$router.push({ name: 'CommentDelete', params: { article_id: this.$route.params.article_id, comment_id: commentId}})
+			this.$router.push({ name: 'CommentDelete', params: { article_id: this.articleId, comment_id: commentId}})
 		}
 	},
 	created() {
-		this.getArticleDetail(this.$route.params.article_id)
+		this.getArticleDetail(this.articleId)
 	}
 }
 </script>

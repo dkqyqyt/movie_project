@@ -33,7 +33,7 @@ export default {
     methods: {
         ...mapActions('CommunityModule',['login']),
         moveToSignup() {
-            this.$router.push({ name: 'Signup' })
+            this.$router.replace({ name: 'Signup' })
         }
     }
 }
