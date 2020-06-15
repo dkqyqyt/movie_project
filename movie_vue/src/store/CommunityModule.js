@@ -150,16 +150,24 @@ export default{
         })
         .catch(err => console.log(err.response.data))
     },
-    fetchArticles({ commit }) {
-      axios.get(SERVER.URL + SERVER.ROUTES.getArticles)
+    fetchArticles({ commit, state }) {
+      axios.get(SERVER.URL + SERVER.ROUTES.getArticles, {
+        headers: {
+          Authorization: `JWT ${state.authToken}`
+        }
+      })
         .then(res => {
           console.log(res.data)
           commit('SET_ARTICLES', res.data)
         })
         .catch(err => console.log(err.response.data))
     },
-    getArticlesByMovie({ commit }, movieId) {
-      axios.get(SERVER.URL + SERVER.ROUTES.getArticlesByMovie + movieId + '/')
+    getArticlesByMovie({ commit, state }, movieId) {
+      axios.get(SERVER.URL + SERVER.ROUTES.getArticlesByMovie + movieId + '/', {
+        headers: {
+          Authorization: `JWT ${state.authToken}`
+        }
+      })
         .then(res => {
           commit('SET_ARTICLES_BY_MOVIE', res.data)
         })
@@ -180,8 +188,12 @@ export default{
         })
         .catch(err => console.log(err.response.data))
     },
-    getArticleDetail({ commit } , articleId) {
-        axios.get(SERVER.URL + SERVER.ROUTES.getArticleDetail + articleId + '/')
+    getArticleDetail({ commit, state } , articleId) {
+        axios.get(SERVER.URL + SERVER.ROUTES.getArticleDetail + articleId + '/', {
+          headers: {
+            Authorization: `JWT ${state.authToken}`
+          }
+        })
             .then(res => {
                 console.log(res)
                 commit('SELECT_ARTICLE', res.data[0])

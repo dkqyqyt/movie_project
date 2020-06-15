@@ -107,7 +107,7 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to,from,next) => {
-  const publicPages = ['Login', 'Signup', 'MovieList', 'MovieDetail', 'ArticleList', 'ArticleDetail', 'Home']
+  const publicPages = ['Login', 'Signup', 'MovieList', 'MovieDetail', 'Home']
   const authPages = ['Login', 'Signup']
 
   const authRequired = !publicPages.includes(to.name)
