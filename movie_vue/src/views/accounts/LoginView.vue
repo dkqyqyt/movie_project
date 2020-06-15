@@ -3,10 +3,10 @@
       <h1 class="text-center">로그인</h1>
       <div class="login-form">
         <div class="form-group">
-            <input class="form-control" v-model="loginData.username" id="username" type="text" placeholder="아이디">
+            <input class="form-control" @keypress.enter="login(loginData)" v-model="loginData.username" id="username" type="text" placeholder="아이디">
         </div>
         <div class="form-group">
-            <input class="form-control" v-model="loginData.password" id="password" type="password" placeholder="비밀번호">
+            <input class="form-control" @keypress.enter="login(loginData)" v-model="loginData.password" id="password" type="password" placeholder="비밀번호">
         </div>
         <button class="btn btn-primary" @click="login(loginData)">로그인</button>
       </div>
