@@ -22,6 +22,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         read_only_fields = ['id']
 
 class CommentListSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
     class Meta:
         model = Comment
         fields = ['id','content', 'user']
