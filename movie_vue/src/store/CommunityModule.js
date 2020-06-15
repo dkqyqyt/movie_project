@@ -68,20 +68,29 @@ export default{
   },
   actions: {
     postAuthData({ commit }, info) {
+      const redirectUrl = info.redirectUrl
+      delete info.redirectUrl
       axios.post(SERVER.URL + info.location, info.data)
         .then(res => {
             console.log(res)
           commit('SET_TOKEN', res.data.token)
           commit('SET_ISADMIN', res.data.user.is_superuser)
           commit('SET_USERNAME', res.data.user.username)
-          router.push({ name: 'Home' })
+          if(redirectUrl) {
+            router.push(redirectUrl)
+          }else {
+            router.push({ name: 'Home' })
+          }
         })
         .catch(err => console.log(err.response.data))
     },
     login({ dispatch }, loginData) {
+      const redirectUrl = loginData.redirectUrl
+      delete loginData.redirectUrl
       const info = {
         data: loginData,
-        location: SERVER.ROUTES.login
+        location: SERVER.ROUTES.login,
+        redirectUrl: redirectUrl
       }
       dispatch('postAuthData', info)
     },
@@ -107,7 +116,15 @@ export default{
             router.push({ name: 'Home'})
         })
     },
-    fetchMovies({ commit,state }) {
+    fetchMovies({ commit }) {
+      axios.get(SERVER.URL + SERVER.ROUTES.getMovies)
+        .then(res => {
+          console.log(res)
+          commit('SET_MOVIES', res.data)
+        })
+        .catch(err => console.log(err.response.data))
+    },
+    fetchRecommendMovies({ commit,state }) {
       axios.get(SERVER.URL + SERVER.ROUTES.getMovies, {
         headers: {
           Authorization: `JWT ${state.authToken}`

@@ -7,18 +7,18 @@
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
         <div class="navbar-nav" v-if="isLoggedIn">
-          <router-link class="nav-item nav-link" :to="{ name: 'MovieList' }">Movie</router-link>
-          <router-link class="nav-item nav-link" :to="{ name: 'MovieRecommend' }">Movie 추천</router-link>
-          <router-link v-if="isAdmin" class="nav-item nav-link" :to="{ name: 'MovieCreate' }">Movie Create</router-link>
-          <router-link class="nav-item nav-link" :to="{ name: 'ArticleList' }">Article</router-link>
-          <router-link class="nav-item nav-link" :to="{ name: 'Logout' }">Logout</router-link>
+          <router-link class="nav-item nav-link" :to="{ name: 'MovieList' }">영화</router-link>
+          <router-link class="nav-item nav-link" :to="{ name: 'MovieRecommend' }">영화추천</router-link>
+          <router-link v-if="isAdmin" class="nav-item nav-link" :to="{ name: 'MovieCreate' }">영화생성</router-link>
+          <router-link class="nav-item nav-link" :to="{ name: 'ArticleList' }">게시글</router-link>
+          <router-link class="nav-item nav-link" :to="{ name: 'Logout' }">로그아웃</router-link>
           <span v-if="loginUsername" class="nav-item nav-link">{{ loginUsername }}님 환영합니다.</span>
         </div>
         <div class="navbar-nav" v-else>
-          <router-link class="nav-item nav-link" :to="{ name: 'MovieList' }">Movie</router-link>
-          <router-link class="nav-item nav-link" :to="{ name: 'ArticleList' }">Article</router-link>
-          <router-link class="nav-item nav-link" :to="{ name: 'Login' }">Login</router-link>
-          <router-link class="nav-item nav-link" :to="{ name: 'Signup' }">Signup</router-link>
+          <router-link class="nav-item nav-link" :to="{ name: 'MovieList' }">영화</router-link>
+          <router-link class="nav-item nav-link" :to="{ name: 'MovieRecommend' }">영화추천</router-link>
+          <router-link class="nav-item nav-link" :to="{ name: 'ArticleList' }">게시글</router-link>
+          <router-link class="nav-item nav-link" :to="{ name: 'Login' }">로그인</router-link>
         </div>
       </div>
     </nav>    

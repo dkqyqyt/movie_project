@@ -35,7 +35,13 @@ export default {
         ...mapState('CommunityModule',['articlesByMovie','selectedMovie'])
     },
     methods: {
-        ...mapActions('CommunityModule',['getArticlesByMovie'])
+        ...mapActions('CommunityModule',['getArticlesByMovie']),
+        moveToMovie(movieId) {
+            this.$router.push({ name: 'MovieDetail', params: {id: movieId}})
+        },
+        moveToArticleDetail(articleId) {
+            this.$router.push({ name: 'ArticleDetail', params: {movie_id: this.movieId, article_id: articleId}})
+        },
     },
     created() {
         this.getArticlesByMovie(this.$route.params.movie_id)
@@ -43,6 +49,13 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+    td.article-title:hover {
+        cursor: pointer;
+        color: blue
+    }
+    td.article-movie:hover {
+        cursor: pointer;
+        color: blue;
+    }
 </style>

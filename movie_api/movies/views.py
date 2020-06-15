@@ -96,7 +96,7 @@ def update(request, movie_pk):
     return Response(serializer.data)
 
 @api_view(['GET'])
-# @permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated])
 def recommend(request, movie_pk):
     movie = get_object_or_404(Movie,pk = movie_pk)
     print(movie)

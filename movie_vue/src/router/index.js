@@ -125,7 +125,10 @@ router.beforeEach((to,from,next) => {
   }
 
   if(authRequired && !isLogin) {
-    next({ name: 'Login' })
+    next({
+      path: '/accounts/login',
+      query: { redirect: to.fullPath }
+    })
   }else {
     next()
   }

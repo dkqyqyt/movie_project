@@ -45,13 +45,13 @@ export default {
         }
     },
     methods: {
-        ...mapActions('CommunityModule',['fetchMovies', 'recommendMovies']),
+        ...mapActions('CommunityModule',['fetchRecommendMovies', 'recommendMovies']),
         movieDetail(movieId) {
             this.$router.push({ name: 'MovieDetail', params: { id: movieId}})
         },
     },
     mounted() {
-        this.fetchMovies()
+        this.fetchRecommendMovies()
     }
 }
 </script>
