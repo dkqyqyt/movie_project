@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="login">
       <h1 class="text-center">로그인</h1>
       <div class="login-form">
         <div class="form-group">
@@ -41,10 +41,20 @@ export default {
 
 <style scoped>
     div.login-form {
-        width: 50%;
+        width: 300px;
         margin: 30px auto;
     }
     div.signup {
         background-color: #313288 ;
+    }
+    div.form-group input {
+        height: 50px;
+        border-radius: 10px;
+    }
+    .login{
+        position:absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 </style>
