@@ -2,8 +2,9 @@
   <div>
       <div v-if="!isSelected">
         <h1 class="text-center">영화 추천</h1>
+        <h3 class="text-center">영화를 하나 선택해주세요!</h3>
         <div class="movie-list-item row">
-            <div class="col-3" v-for="movie in movies" :key="movie.id">
+            <div class="col-lg-3 col-sm-6" v-for="movie in movies" :key="movie.id">
                 <div class="card">
                     <img :src="'http://image.tmdb.org/t/p/w185/'+ movie.poster_path" class="card-img-top" alt="영화 포스터">
                     <div class="card-body">
@@ -20,7 +21,7 @@
       <div v-else>
           <h1>영화 추천</h1>
           <div class="movie-list-item row">
-            <div class="col-3" v-for="movie in recommendedMovies" :key="movie.id">
+            <div class="col-lg-3 col-sm-6" v-for="movie in recommendedMovies" :key="movie.id">
                 <div class="card">
                     <img :src="'http://image.tmdb.org/t/p/w185/'+ movie.poster_path" class="card-img-top" alt="영화 포스터">
                     <div class="card-body">
