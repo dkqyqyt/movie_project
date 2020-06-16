@@ -178,6 +178,7 @@ export default{
         }
       })
         .then(res => {
+          console.log(res.data)
           commit('SET_ARTICLES_BY_MOVIE', res.data)
         })
         .catch(err => console.log(err.response.data))
