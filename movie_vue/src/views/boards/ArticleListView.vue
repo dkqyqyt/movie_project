@@ -5,7 +5,7 @@
         <thead class="thead-dark">
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">제목</th>
+                <th scope="col">글 제목</th>
                 <th scope="col">영화</th>
                 <!-- <th scope="col">장르</th> -->
                 <th scope="col">평점</th>
@@ -57,11 +57,15 @@ export default {
 
 <style scoped>
     td.article-title:hover {
-        cursor: pointer;
-        color: blue
-    }
-    td.article-movie:hover {
+        /* background-color: lightgray; */
         cursor: pointer;
         color: blue;
+        text-decoration: underline;
+    }
+    td.article-movie:hover {
+        /* background-color: lightgray;  */
+        cursor: pointer;
+        color: blue;
+        text-decoration: underline;
     }
 </style>
