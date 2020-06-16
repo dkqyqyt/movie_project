@@ -28,15 +28,13 @@ export default{
       state.authToken = token
       cookies.set('auth-token', token)
     },
-    SET_ISADMIN(state, bool) {
-        if(bool) {
+    SET_USERDATA(state, user) {
+        if(user.is_superuser) {
             state.isAdmin = true
         }else {
             state.isAdmin = false
         }
-    },
-    SET_USERNAME(state, name) {
-        state.loginUsername = name
+        state.loginUsername = user.name
     },
     SET_MOVIES(state, movies) {
       state.movies = movies
@@ -73,8 +71,7 @@ export default{
       axios.post(SERVER.URL + info.location, info.data)
         .then(res => {
           commit('SET_TOKEN', res.data.token)
-          commit('SET_ISADMIN', res.data.user.is_superuser)
-          commit('SET_USERNAME', res.data.user.username)
+          commit('SET_USERDATA', res.data.user)
           router.replace(redirectUrl || { name: 'Home'})
         })
         .catch(err => console.log(err.response.data))
@@ -100,7 +97,7 @@ export default{
       axios.post(SERVER.URL + SERVER.ROUTES.logout, null, getters.config)
         .then(() => {
           commit('SET_TOKEN', null)
-          commit('SET_ISADMIN', false)
+          commit('SET_USERDATA', {is_superuser: false, name: null})
           cookies.remove('auth-token')
           router.replace({ name: 'Home' })
         })
