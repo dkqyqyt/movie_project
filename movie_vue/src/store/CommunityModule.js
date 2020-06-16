@@ -34,7 +34,7 @@ export default{
         }else {
             state.isAdmin = false
         }
-        state.loginUsername = user.name
+        state.loginUsername = user.username
     },
     SET_MOVIES(state, movies) {
       state.movies = movies
@@ -70,6 +70,7 @@ export default{
       delete info.redirectUrl
       axios.post(SERVER.URL + info.location, info.data)
         .then(res => {
+          console.log(res.data)
           commit('SET_TOKEN', res.data.token)
           commit('SET_USERDATA', res.data.user)
           router.replace(redirectUrl || { name: 'Home'})
@@ -97,7 +98,11 @@ export default{
       axios.post(SERVER.URL + SERVER.ROUTES.logout, null, getters.config)
         .then(() => {
           commit('SET_TOKEN', null)
-          commit('SET_USERDATA', {is_superuser: false, name: null})
+          const user = {
+            is_superuser: false,
+            username: null,
+          }
+          commit('SET_USERDATA', user)
           cookies.remove('auth-token')
           router.replace({ name: 'Home' })
         })
@@ -189,8 +194,8 @@ export default{
       }
       console.log(articleData)
       axios.post(SERVER.URL + SERVER.ROUTES.createArticle + movieId + '/', newArticleData, getters.config)
-        .then(() => {
-          router.push({ name: 'ArticleList' })
+        .then(res => {
+          router.push({ name: 'ArticleDetail', params: {article_id: res.data.id}})
         })
         .catch(err => console.log(err.response.data))
     },

@@ -50,10 +50,10 @@ export default {
         this.$router.push({name : 'MovieList'})
       },
       moveToMovieRecommend() {
-        this.$router.push({name : 'MovieRecommend'})
+        this.$router.push({name : 'MovieRecommend'},()=>{})
       },
       moveToArticleList() {
-        this.$router.push({name : 'ArticleList'})
+        this.$router.push({name : 'ArticleList'},()=>{})
       }
     }
   

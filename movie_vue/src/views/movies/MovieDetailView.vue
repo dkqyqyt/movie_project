@@ -45,13 +45,13 @@ export default {
             this.$router.push({ name: 'MovieDelete' })
         },
         updateMovie() {
-            this.$router.push({ name: 'MovieCreate', params: { movie_id: this.$route.params.id }})
+            this.$router.push({ name: 'MovieCreate', params: { movie_id: this.$route.params.id }},()=>{})
         },
         createArticle() {
-            this.$router.push({ name: 'ArticleCreate', params:{ movie_id: this.$route.params.id}})
+            this.$router.push({ name: 'ArticleCreate', params:{ movie_id: this.$route.params.id}},()=>{})
         },
         getArticleByMovie() {
-            this.$router.push({ name: 'ArticleListByMovie', params: { movie_id: this.$route.params.id }})
+            this.$router.push({ name: 'ArticleListByMovie', params: { movie_id: this.$route.params.id }},()=>{})
         }
     },
     created() {

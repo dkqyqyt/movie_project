@@ -32,7 +32,7 @@
 	<div class="ui comments">
 		<h3 class="ui dividing header">댓글</h3>
 		<textarea v-model="commentData.content" placeholder="타인을 배려합시다 !" id="comment" cols="100" rows="3"></textarea>
-		<button class="ui primary button" @click="createComment(commentData)">댓글 작성</button>
+		<button class="ui primary button tiny" @click="createComment(commentData)">댓글 작성</button>
 
 		<div v-for="comment in comments" :key="comment.id" class="comment">
 			<a class="avatar">
@@ -41,7 +41,7 @@
 			<a class="author">{{ comment.user.username }}</a>
 			<div class="metadata">
 				<span class="date">{{ comment.created_at }}</span>
-				<button class="btn btn-danger" @click="deleteComment(comment.id)">삭제</button>
+				<button class="ui icon button negative mini" @click="deleteComment(comment.id)">X</button>
 			</div>
 			<div class="text">
 				{{comment.content}}
@@ -97,6 +97,6 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>
