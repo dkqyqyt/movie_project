@@ -75,7 +75,20 @@ export default{
           commit('SET_USERDATA', res.data.user)
           router.replace(redirectUrl || { name: 'Home'})
         })
-        .catch(err => console.log(err.response.data))
+        .catch(err => {
+          console.log(err.response)
+          if(err.response.data.username) {
+            alert('아이디 : ' + err.response.data.username)
+          }else if(err.response.data.password) {
+            alert('비밀번호 : ' + err.response.data.password)
+          }else if(err.response.data.password1) {
+            alert('비밀번호 : ' + err.response.data.password1)
+          }else if(err.response.data.password2) {
+            alert('비밀번호 확인 : ' + err.response.data.password2)
+          }else if(err.response.data.non_field_errors) {
+            alert(err.response.data.non_field_errors)
+          }
+        })
     },
     login({ dispatch }, loginData) {
       const redirectUrl = loginData.redirectUrl
