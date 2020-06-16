@@ -28,15 +28,13 @@ export default{
       state.authToken = token
       cookies.set('auth-token', token)
     },
-    SET_ISADMIN(state, bool) {
-        if(bool) {
+    SET_USERDATA(state, user) {
+        if(user.is_superuser) {
             state.isAdmin = true
         }else {
             state.isAdmin = false
         }
-    },
-    SET_USERNAME(state, name) {
-        state.loginUsername = name
+        state.loginUsername = user.username
     },
     SET_MOVIES(state, movies) {
       state.movies = movies
@@ -72,9 +70,9 @@ export default{
       delete info.redirectUrl
       axios.post(SERVER.URL + info.location, info.data)
         .then(res => {
+          console.log(res.data)
           commit('SET_TOKEN', res.data.token)
-          commit('SET_ISADMIN', res.data.user.is_superuser)
-          commit('SET_USERNAME', res.data.user.username)
+          commit('SET_USERDATA', res.data.user)
           router.replace(redirectUrl || { name: 'Home'})
         })
         .catch(err => console.log(err.response.data))
@@ -100,7 +98,11 @@ export default{
       axios.post(SERVER.URL + SERVER.ROUTES.logout, null, getters.config)
         .then(() => {
           commit('SET_TOKEN', null)
-          commit('SET_ISADMIN', false)
+          const user = {
+            is_superuser: false,
+            username: null,
+          }
+          commit('SET_USERDATA', user)
           cookies.remove('auth-token')
           router.replace({ name: 'Home' })
         })
@@ -192,8 +194,8 @@ export default{
       }
       console.log(articleData)
       axios.post(SERVER.URL + SERVER.ROUTES.createArticle + movieId + '/', newArticleData, getters.config)
-        .then(() => {
-          router.push({ name: 'ArticleList' })
+        .then(res => {
+          router.push({ name: 'ArticleDetail', params: {article_id: res.data.id}})
         })
         .catch(err => console.log(err.response.data))
     },

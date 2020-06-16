@@ -115,21 +115,21 @@ const router = new VueRouter({
 router.beforeEach((to,from,next) => {
   const publicPages = ['Login', 'Signup', 'MovieList', 'MovieDetail', 'Home']
   const authPages = ['Login', 'Signup']
-
+  console.log(from.fullPath+ "," + to.fullPath)
   const authRequired = !publicPages.includes(to.name)
   const unauthRequired = authPages.includes(to.name)
   const isLogin = !!Vue.$cookies.isKey('auth-token')
 
   if(unauthRequired && isLogin) {
     next({ name: 'MovieList'})
-  }
-
-  if(authRequired && !isLogin) {
+  }else if(authRequired && !isLogin) {
+    console.log('login')
     next({
-      path: '/accounts/login',
+      name: 'Login',
       query: { redirect: to.fullPath }
     })
   }else {
+    console.log('next')
     next()
   }
 })

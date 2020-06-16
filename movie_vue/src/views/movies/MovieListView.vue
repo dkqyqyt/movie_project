@@ -44,6 +44,10 @@ export default {
     }
     div.card {
         margin: 5px 0;
+        border-radius: 10px;
+    }
+    img.card-img-top {
+        border-radius: 10px;
     }
     div.btn btn-warning {
         margin: auto;
