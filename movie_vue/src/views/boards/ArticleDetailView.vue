@@ -6,7 +6,9 @@
 	<hr>
 	<!-- <h1 class="ui header">{{ selectedArticle.title }}</h1> -->
 	<div class="ui segment">
-		<h2 class="ui left floated header">{{ selectedArticle.title }}</h2>
+		<h1 class="ui left floated header">{{ selectedArticle.title }}</h1>
+		<!-- <p class="ui right aligned segment">작성자 : {{ selectedArticle.user.username }}</p>
+		<p class="ui right aligned segment">영화 : {{ selectedArticle.movie.title }}</p> -->
 		<div class="ui clearing divider"></div>
 	<p>{{ selectedArticle.content }}</p>
 	</div>
