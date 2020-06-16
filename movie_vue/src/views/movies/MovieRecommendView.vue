@@ -1,7 +1,6 @@
 <template>
   <div>
       <div v-if="!isSelected">
-        <h1 class="text-center">영화 추천</h1>
         <h3 class="text-center">영화를 하나 선택해주세요!</h3>
         <div class="movie-list-item row">
             <div class="col-lg-3 col-sm-6" v-for="movie in movies" :key="movie.id">

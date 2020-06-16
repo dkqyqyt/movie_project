@@ -1,5 +1,6 @@
 import cookies from 'vue-cookies'
 import axios from 'axios'
+import swal from 'sweetalert'
 
 import SERVER from '../api/drf'
 import router from '../router'
@@ -78,15 +79,15 @@ export default{
         .catch(err => {
           console.log(err.response)
           if(err.response.data.username) {
-            alert('아이디 : ' + err.response.data.username)
+            swal('아이디 : ' + err.response.data.username)
           }else if(err.response.data.password) {
-            alert('비밀번호 : ' + err.response.data.password)
+            swal('비밀번호 : ' + err.response.data.password)
           }else if(err.response.data.password1) {
-            alert('비밀번호 : ' + err.response.data.password1)
+            swal('비밀번호 : ' + err.response.data.password1)
           }else if(err.response.data.password2) {
-            alert('비밀번호 확인 : ' + err.response.data.password2)
+            swal('비밀번호 확인 : ' + err.response.data.password2)
           }else if(err.response.data.non_field_errors) {
-            alert(err.response.data.non_field_errors)
+            swal(""+ err.response.data.non_field_errors)
           }
         })
     },
@@ -146,7 +147,11 @@ export default{
           const movieId = res.data.id
           router.push({ name: 'MovieDetail', params: { id: movieId}})
         })
-        .catch(err => console.log(err.response.data))
+        .catch(err => {
+          if(err.response.data) {
+            swal('모든 항목은 필수 항목입니다.')
+          }
+        })
     },
     getMovieDetail({ commit }, movieId) {
         axios.get(SERVER.URL + SERVER.ROUTES.getMovies + movieId + '/')
@@ -210,7 +215,11 @@ export default{
         .then(res => {
           router.push({ name: 'ArticleDetail', params: {article_id: res.data.id}})
         })
-        .catch(err => console.log(err.response.data))
+        .catch(err => {
+          if(err.response.data) {
+            swal('모든 항목은 필수 항목입니다.')
+          }
+        })
     },
     getArticleDetail({ commit, state } , articleId) {
         axios.get(SERVER.URL + SERVER.ROUTES.getArticleDetail + articleId + '/', {
