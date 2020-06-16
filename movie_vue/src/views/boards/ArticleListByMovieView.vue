@@ -23,6 +23,7 @@
             </tr>
         </tbody>
       </table>
+        <h3 v-if="!articlesByMovie.length" class="text-center">게시글이 없습니다.</h3>
   </div>
 </template>
 
