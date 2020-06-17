@@ -16,7 +16,7 @@
 	
 	<hr>
 	<button class="ui green button" @click="moveToUpdate" v-if="loginUsername === selectedArticle.user.username">수정</button>
-	<button class="ui red button" @click="moveToDelete" v-if="loginUsername === selectedArticle.user.username">삭제</button>
+	<button class="ui red button" @click="moveToDelete" v-if="loginUsername === selectedArticle.user.username || isAdmin">삭제</button>
 	<div class="comments">
 		<h3 class="ui dividing header">댓글</h3>
 		<textarea class="comment-input" v-model="commentData.content" placeholder="타인을 배려합시다 !" id="comment" col="100" rows="3"></textarea>
@@ -28,7 +28,7 @@
 					<span class="username">{{ comment.user.username }}&#9;</span>
 					<span class="date">{{ comment.created_at }}</span>
 				</span>
-				<button v-if="loginUsername === comment.user.username" class="ui icon button negative mini" @click="deleteComment(comment.id)">X</button>
+				<button v-if="loginUsername === comment.user.username || isAdmin" class="ui icon button negative mini" @click="deleteComment(comment.id)">X</button>
 			</div>
 			<div class="text">{{comment.content}}</div>
 			<hr>
@@ -44,7 +44,7 @@ import { mapActions, mapState } from 'vuex'
 export default {
 	name: 'ArticleDetailView',
 	computed: {
-		...mapState('CommunityModule',['selectedArticle','comments','loginUsername']),
+		...mapState('CommunityModule',['selectedArticle','comments','loginUsername','isAdmin']),
 		movieId() {
 			return this.selectedArticle.movie.id
 		},

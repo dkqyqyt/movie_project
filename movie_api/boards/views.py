@@ -48,8 +48,8 @@ def detail(request, article_pk):
         article_serializer = ArticleListSerializer(article)
         comment_serializer = CommentListSerializer(comments, many=True)
         return Response((article_serializer.data, comment_serializer.data))
-    elif request.method == "DELETE" :
-        if not request.user == article.user:
+    elif request.method == "DELETE":
+        if not request.user == article.user and not request.user.is_superuser:
             return Response({' 삭제할 권한이 없습니다. '})
         article.delete()
         return Response({' 성공적으로 삭제되었습니다.'})
@@ -80,7 +80,7 @@ def comment_create(request, article_pk):
 @api_view(['DELETE'])
 def comment_delete(request, comment_pk, article_pk):
     comment = get_object_or_404(Comment, pk = comment_pk)
-    if request.user == comment.user :
+    if request.user == comment.user or request.user.is_superuser:
         comment.delete()
         return Response({' 해당 댓글이 성공적으로 삭제되었습니다.'})
     else :
