@@ -69,12 +69,12 @@ export default {
         text-decoration: underline;
     }
     thead {
-        background-color: #006598
+        background-color: #00A712
     }
     tbody {
-        background-color: #01506A
+        background-color: white;
     }
-    th,td {
+    thead tr th {
         color: white;
     }
 </style>
