@@ -2,7 +2,7 @@
   <div>
       <h1 class="text-center">{{ selectedMovie.title }}</h1>
       <table class="table">
-        <thead class="thead-dark">
+        <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">제목</th>
@@ -52,11 +52,24 @@ export default {
 
 <style scoped>
     td.article-title:hover {
-        cursor: pointer;
-        color: blue
-    }
-    td.article-movie:hover {
+        /* background-color: lightgray; */
         cursor: pointer;
         color: blue;
+        text-decoration: underline;
+    }
+    td.article-movie:hover {
+        /* background-color: lightgray;  */
+        cursor: pointer;
+        color: blue;
+        text-decoration: underline;
+    }
+    thead {
+        background-color: #00A712
+    }
+    tbody {
+        background-color: white;
+    }
+    thead tr th {
+        color: white;
     }
 </style>
