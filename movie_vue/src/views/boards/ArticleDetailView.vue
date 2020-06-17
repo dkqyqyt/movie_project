@@ -1,57 +1,39 @@
 <template>
   <div>
-	<h1 class="text-center">상세 게시글</h1>
-	<p>작성자 : {{ selectedArticle.user.username }}</p>
-	<p>영화 : {{ selectedArticle.movie.title }}</p>
-	<hr>
-	<!-- <h1 class="ui header">{{ selectedArticle.title }}</h1> -->
-	<div class="ui segment">
-		<h1 class="ui left floated header">{{ selectedArticle.title }}</h1>
-		<!-- <p class="ui right aligned segment">작성자 : {{ selectedArticle.user.username }}</p>
-		<p class="ui right aligned segment">영화 : {{ selectedArticle.movie.title }}</p> -->
-		<div class="ui clearing divider"></div>
-	<p>{{ selectedArticle.content }}</p>
+	<h1 class="text-center mb-5">상세 게시글</h1>
+	<h1 class="ui header">{{ selectedArticle.title }}</h1>
+	<div>
+		<h3>작성자 : {{ selectedArticle.user.username }}</h3>
+		<div class="d-flex justify-content-between">
+			<span>영화 : {{ selectedArticle.movie.title }}</span>
+			<span>작성일 : {{ selectedArticle.created_at }}</span>
+		</div>
 	</div>
-	<!-- <hr>
-	<p>{{ selectedArticle.content}}</p> -->
 	<hr>
-	<p>작성일 : {{ selectedArticle.created_at }}</p>
-	<p>수정일 : {{ selectedArticle.updated_at }}</p>
+	<div class="article-content">
+		<p>{{ selectedArticle.content }}</p>
+	</div>
+	
 	<hr>
 	<button class="ui green button" @click="moveToUpdate" v-if="loginUsername === selectedArticle.user.username">수정</button>
 	<button class="ui red button" @click="moveToDelete" v-if="loginUsername === selectedArticle.user.username">삭제</button>
-	<!-- <hr> -->
-	<!-- Comments<br>
-	<label for="comment"></label>
-	<textarea v-model="commentData.content" id="comment" cols="100" rows="3"></textarea>
-	<button @click="createComment(commentData)">댓글 작성</button>
-	<ul>
-		<li v-for="comment in comments" :key="comment.id">
-			{{ comment.content }}
-			<button @click="deleteComment(comment.id)">삭제</button>
-		</li>
-	</ul> -->
-	<div class="ui comments">
+	<div class="comments">
 		<h3 class="ui dividing header">댓글</h3>
-		<textarea v-model="commentData.content" placeholder="타인을 배려합시다 !" id="comment" cols="100" rows="3"></textarea>
+		<textarea class="comment-input" v-model="commentData.content" placeholder="타인을 배려합시다 !" id="comment" col="100" rows="3"></textarea>
 		<button class="ui primary button tiny" @click="createComment(commentData)">댓글 작성</button>
-
+		<hr>
 		<div v-for="comment in comments" :key="comment.id" class="comment">
-			<a class="avatar">
-			</a>
-			<div class="content">
-			<a class="author">{{ comment.user.username }}</a>
-			<div class="metadata">
-				<span class="date">{{ comment.created_at }}</span>
+			<div class="content d-flex justify-content-between">
+				<span>
+					<span class="username">{{ comment.user.username }}&#9;</span>
+					<span class="date">{{ comment.created_at }}</span>
+				</span>
 				<button class="ui icon button negative mini" @click="deleteComment(comment.id)">X</button>
 			</div>
-			<div class="text">
-				{{comment.content}}
-			</div>
+			<div class="text">{{comment.content}}</div>
+			<hr>
 			</div>
 		</div>
-		
-	</div>
   </div>
 </template>
 
@@ -100,5 +82,23 @@ export default {
 </script>
 
 <style scoped>
-
+div.article-content {
+	min-height: 100px;
+}
+textarea {
+	width: 100%
+}
+div.comments {
+	margin-top: 30px
+}
+span.date {
+	opacity: 0.6;
+	font-size: 0.8rem;
+}
+span.username {
+	font-size: 1.2rem;
+}
+div.text {
+	font-size: 0.9rem;
+}
 </style>

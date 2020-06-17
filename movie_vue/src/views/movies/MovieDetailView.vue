@@ -10,8 +10,8 @@
                 <h3>{{ selectedMovie.title }} <span class="badge badge-info">{{ selectedMovie.vote_average }}</span></h3>
                 <p>{{ selectedMovie.original_title }}, {{ selectedMovie.release_date }}</p>
                 <hr>
-                <h5>장르</h5>
-                <span class="badge badge-info genre" v-for="genre in selectedMovie.genres" :key="genre.id">{{ genre.name }}</span>
+                <h3>장르</h3>
+                <div class="badge badge-pill badge-info genre" v-for="genre in selectedMovie.genres" :key="genre.id">{{ genre.name }}</div>
                 <hr>
                 <h5 v-if="selectedMovie.overview">줄거리</h5>
                 <p>{{ selectedMovie.overview }}</p>

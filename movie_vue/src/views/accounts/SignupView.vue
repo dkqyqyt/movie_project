@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="signup">
       <h1 class='text-center'>회원 가입</h1>
       <div class="signup-form">
         <div class="form-group">
@@ -38,7 +38,17 @@ export default {
 
 <style scoped>
     div.signup-form {
-        width: 70%;
+        width: 300px;
         margin: 30px auto;
+    }
+    div.form-group input {
+        height: 50px;
+        border-radius: 10px;
+    }
+    .signup{
+        position:absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 </style>

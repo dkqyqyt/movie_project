@@ -2,7 +2,7 @@
   <div>
       <h1 class="text-center">게시글</h1>
       <table class="table">
-        <thead class="thead-dark">
+        <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">글 제목</th>
@@ -67,5 +67,14 @@ export default {
         cursor: pointer;
         color: blue;
         text-decoration: underline;
+    }
+    thead {
+        background-color: #00A712
+    }
+    tbody {
+        background-color: white;
+    }
+    thead tr th {
+        color: white;
     }
 </style>
