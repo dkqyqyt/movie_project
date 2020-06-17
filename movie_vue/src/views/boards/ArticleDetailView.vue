@@ -28,7 +28,7 @@
 					<span class="username">{{ comment.user.username }}&#9;</span>
 					<span class="date">{{ comment.created_at }}</span>
 				</span>
-				<button class="ui icon button negative mini" @click="deleteComment(comment.id)">X</button>
+				<button v-if="loginUsername === comment.user.username" class="ui icon button negative mini" @click="deleteComment(comment.id)">X</button>
 			</div>
 			<div class="text">{{comment.content}}</div>
 			<hr>

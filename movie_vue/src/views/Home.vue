@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>All about Movie</h1>
+    <h1 class="text-center">All about Movie</h1>
     <div class="head">
       <figure class="snip1283">
         <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60" alt="sample70"/>

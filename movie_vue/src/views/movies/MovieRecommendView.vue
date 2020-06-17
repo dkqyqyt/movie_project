@@ -1,7 +1,7 @@
 <template>
   <div>
       <div v-if="!isSelected">
-        <h3 class="text-center">영화를 하나 선택해주세요!</h3>
+        <h3 class="text-center">영화를 하나 선택해주세요.<br>추천해드릴게요~</h3>
         <div class="movie-list-item row">
             <div class="col-lg-3 col-sm-6" v-for="movie in movies" :key="movie.id">
                 <div class="card">
@@ -18,7 +18,7 @@
         </div>
       </div>
       <div v-else>
-          <h1>영화 추천</h1>
+          <h1 class="text-center">추천 영화</h1>
           <div class="movie-list-item row">
             <div class="col-lg-3 col-sm-6" v-for="movie in recommendedMovies" :key="movie.id">
                 <div class="card">
