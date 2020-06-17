@@ -19,7 +19,7 @@
 	<p>수정일 : {{ selectedArticle.updated_at }}</p>
 	<hr>
 	<button class="ui green button" @click="moveToUpdate" v-if="loginUsername === selectedArticle.user.username">수정</button>
-	<button class="ui red button" @click="moveToDelete" v-if="loginUsername === selectedArticle.user.username">삭제</button>
+	<button class="ui red button" @click="moveToDelete" v-if="loginUㄴsername === selectedArticle.user.username">삭제</button>
 	<!-- <hr> -->
 	<!-- Comments<br>
 	<label for="comment"></label>
