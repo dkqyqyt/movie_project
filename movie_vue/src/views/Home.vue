@@ -6,7 +6,7 @@
         <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60" alt="sample70"/>
         <figcaption>
           <h1>영화 리스트 </h1>
-          <p>100개가 넘는 영화가 담겨 있는 영화 리스트입니다. 나라별, 장르별 취향대로 즐기세요 !</p><button class="ui inverted purple basic button" @click="moveToMovieList">리스트 보기</button>
+          <p>100개가 넘는 영화가 담겨 있는 영화 리스트입니다. 나라별, 장르별 취향대로 즐기세요 !</p><button class="ui inverted green button" @click="moveToMovieList">리스트 보기</button>
         </figcaption>
       </figure>
 
@@ -14,7 +14,7 @@
         <img src="https://images.unsplash.com/photo-1452697620382-f6543ead73b5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60" alt="sample70"/>
         <figcaption>
           <h1>영화 추천 </h1>
-          <p>좋아하는 영화를 고르면 추천 알고리즘에 의해 비슷한 취향의 영화들이 추천됩니다. </p><button class="ui inverted blue basic button" @click="moveToMovieRecommend">추천 영화 보기</button>
+          <p>좋아하는 영화를 고르면 추천 알고리즘에 의해 비슷한 취향의 영화들이 추천됩니다. </p><button class="ui inverted blue button" @click="moveToMovieRecommend">추천 영화 보기</button>
         </figcaption>
       </figure>
 
@@ -23,7 +23,7 @@
         <figcaption>
           <h1>게시판 </h1>
           <p>영화에 관련된 게시판입니다. 영화에 대한 주제로 의견을 공유하세요 !</p>
-          <button class="ui inverted purple olive button" @click="moveToArticleList">게시판 보기</button>
+          <button class="ui inverted olive button" @click="moveToArticleList">게시판 보기</button>
         </figcaption>
       </figure>
     </div>
